@@ -98,12 +98,12 @@ html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-
   background:linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.18) 50%);
   background-size:100% 4px; opacity:0.18; mix-blend-mode:overlay;
 }
-.blob{ position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none; }
+.blob{ position:absolute;border-radius:50%;filter:blur(34px);pointer-events:none;contain:layout paint; }
 .blob-1{ width:420px;height:420px;background:radial-gradient(circle,#a855f7 0%,transparent 70%); opacity:.55; animation:blobFloat 18s ease-in-out infinite; }
 .blob-2{ width:500px;height:500px;background:radial-gradient(circle,#d946ef 0%,transparent 70%); opacity:.45; animation:blobFloat 22s ease-in-out infinite reverse; }
 .blob-3{ width:340px;height:340px;background:radial-gradient(circle,#ec4899 0%,transparent 70%); opacity:.38; animation:blobFloat 16s ease-in-out infinite; }
 .blob-4{ width:400px;height:400px;background:radial-gradient(circle,#6d28d9 0%,transparent 70%); opacity:.48; animation:blobFloat 20s ease-in-out infinite reverse; }
-.blob-xs{ width:220px;height:220px;filter:blur(40px); }
+.blob-xs{ width:220px;height:220px;filter:blur(26px); }
 .aurora{
   position:absolute;inset:-20%;
   background:conic-gradient(from 90deg at 50% 50%,
@@ -113,7 +113,7 @@ html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-
     rgba(236,72,153,0.25) 220deg,
     rgba(109,40,217,0.15) 300deg,
     rgba(109,40,217,0) 360deg);
-  filter:blur(70px); animation:auroraSpin 50s linear infinite; opacity:.45;
+  filter:blur(48px); animation:auroraSpin 50s linear infinite; opacity:.45;contain:layout paint;
 }
 
 /* KEYFRAMES */
@@ -340,9 +340,10 @@ html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-
     rgba(217,70,239,0.3) 170deg,
     rgba(236,72,153,0.2) 240deg,
     rgba(109,40,217,0) 360deg);
-  filter:blur(110px); opacity:.35;
+  filter:blur(60px); opacity:.35;
   animation:auroraSpin 60s linear infinite reverse;
   pointer-events:none;
+  contain:layout paint;
 }
 
 /* LOGO */
@@ -374,8 +375,9 @@ html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-
 .nav-inner{
   display:flex;align-items:center;justify-content:space-between;
   padding:.7rem .7rem .7rem 1.1rem;
-  background:rgba(10,0,20,0.55);
-  backdrop-filter:blur(20px) saturate(160%);
+  background:rgba(10,0,20,0.78);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,0.07);
   border-radius:999px;
   box-shadow:0 10px 40px -10px rgba(109,40,217,0.3);
@@ -437,17 +439,8 @@ html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-
 
 /* cursor-glow removed — lerped RAF on radial-gradient every frame was hot */
 
-/* DIVIDER */
-.divider{
-  height:1px;width:100%;
-  background:linear-gradient(90deg,transparent,var(--c-fuchsia),var(--c-lilac),transparent);
-  opacity:.35;position:relative;
-}
-.divider::after{
-  content:"";position:absolute;inset:-1px 0;
-  background:linear-gradient(90deg,transparent,rgba(232,121,249,0.3),transparent);
-  filter:blur(4px);
-}
+/* DIVIDER — disabled for seamless section flow */
+.divider{ display:none; }
 
 /* ORBIT */
 .orbit{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none; }
@@ -539,18 +532,15 @@ html.se-locked, html.se-locked body{
 ───────────────────────────────────────────────*/
 .zoom-parallax{
   position:relative;
-  height:180vh;
-  background:var(--c-ink);
+  height:220vh;
+  background:transparent;
 }
 .zp-sticky{
   position:sticky; top:0;
   height:100vh;
   overflow:hidden;
   contain:layout paint;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(109,40,217,0.25), transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(236,72,153,0.18), transparent 60%),
-    var(--c-ink);
+  background:transparent;
 }
 .zp-item{
   position:absolute; inset:0;
@@ -586,6 +576,47 @@ html.se-locked, html.se-locked body{
   background: linear-gradient(180deg, rgba(10,0,20,0.1), rgba(10,0,20,0.45));
   pointer-events:none;
 }
+
+/* ─────────────────────────────────────────────
+   BRAND TILES — one-word punch cards for zoom parallax
+───────────────────────────────────────────────*/
+.brand-tile{
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+  text-align:center;
+  padding:6% !important;
+  gap:12px !important;
+  background: linear-gradient(145deg, #1a0b2e 0%, #2e0d4e 55%, #1a0b2e 100%) !important;
+  border:1px solid rgba(217,70,239,0.18);
+  color:white;
+}
+.brand-tile > *{ position:relative; z-index:1; }
+.bt-label{
+  display:block !important;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px !important;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:#e879f9 !important;
+  opacity:.8;
+  white-space:nowrap;
+}
+.bt-big{
+  display:block !important;
+  font-family:'Space Grotesk','Inter',sans-serif;
+  font-weight:700 !important;
+  font-size:clamp(28px, 4.5vw, 64px) !important;
+  line-height:1 !important;
+  letter-spacing:-0.04em;
+  color:#ec4899 !important;
+  text-shadow: 0 0 40px rgba(217,70,239,0.4);
+  white-space:nowrap;
+  margin:0 !important;
+}
+.bt-big--white{ color:#ffffff !important; }
+.bt-big--white .accent{ color:#ec4899 !important; }
+/* Each tile uses the same clamp() sizing — no per-tile anchor needed */
 
 /* Gradual fade-out overlay — smooth transition from zoom to next section */
 .zp-fadeout{
@@ -632,22 +663,9 @@ html.se-locked, html.se-locked body{
 .scroll-expand-bg{
   position:absolute;inset:0;z-index:0;
   transition:opacity 120ms linear;
-  will-change:opacity;
-  /* Pure-CSS aurora — resolution-independent, no upscaling artifacts */
-  background:
-    radial-gradient(ellipse 50% 55% at 18% 25%, rgba(232,121,249,0.55), transparent 65%),
-    radial-gradient(ellipse 60% 60% at 78% 82%, rgba(236,72,153,0.72), transparent 60%),
-    radial-gradient(ellipse 45% 65% at 48% 55%, rgba(217,70,239,0.70), transparent 55%),
-    radial-gradient(ellipse 42% 52% at 65% 15%, rgba(168,85,247,0.55), transparent 60%),
-    radial-gradient(ellipse 38% 48% at 10% 75%, rgba(12,2,20,0.92), transparent 55%),
-    radial-gradient(ellipse 32% 42% at 96% 6%,  rgba(6,2,13,0.85), transparent 55%),
-    linear-gradient(145deg, #1a0b2e 0%, #2e0d4e 40%, #4a148c 72%, #1a0b2e 100%);
-}
-.scroll-expand-bg::before{
-  content:"";position:absolute;inset:0;z-index:2;
-  background:
-    radial-gradient(ellipse at 50% 120%, rgba(6,2,13,0.55), transparent 60%),
-    linear-gradient(to bottom, rgba(6,2,13,0.25), rgba(6,2,13,0.6));
+  /* Transparent — the global aura shows through in the hero too.
+     Kept in DOM so the scroll-expand JS can still toggle its opacity. */
+  background:transparent;
   pointer-events:none;
 }
 .scroll-expand-stage{
@@ -712,18 +730,49 @@ html.se-locked, html.se-locked body{
    UNICORNSTUDIO AURA (Lumina shader, Synar purple hue)
 ───────────────────────────────────────────────*/
 .aura-unicorn{
-  position:absolute; inset:0; z-index:1;
-  width:100%; height:100%;
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  z-index:0;
   pointer-events:none;
-  filter: hue-rotate(250deg) saturate(1.3) brightness(1.05);
   mix-blend-mode: screen;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+  isolation: isolate;      /* so ::after color-blend is scoped to the canvas, not the page */
+  will-change: opacity;
+  opacity:.9;
 }
 .aura-unicorn > div,
 .aura-unicorn canvas{ width:100% !important; height:100% !important; }
+/* Force all shader pixels into Synar purple regardless of the scene's native colors */
+.aura-unicorn::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(135deg,
+    #6d28d9 0%,
+    #a855f7 30%,
+    #d946ef 60%,
+    #ec4899 100%);
+  mix-blend-mode: color;
+  pointer-events:none;
+  z-index:2;
+}
+/* Lift all page content above the ambient aura */
+body > :not(.aura-unicorn){ position:relative; z-index:1; }
 
 .hero-landscape,.hero-glow-radial,.hero-grid,.hero-col,.hero-beam{ display:none !important; }
+
+/* section-aurora removed — global aura does the job */
+
+/* PERF: skip rendering offscreen sections (saves paint/composite work) */
+section{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 800px;
+}
+/* Sticky/scroll-driven sections cannot use content-visibility (breaks math) */
+section.zoom-parallax,
+section#hero,
+section[id="contato"]{
+  content-visibility:visible;
+}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{
@@ -733,13 +782,28 @@ html.se-locked, html.se-locked body{
   }
 }
 @media (max-width: 768px){
-  .blob-1,.blob-2,.blob-3,.blob-4{ filter:blur(60px); }
+  .blob,.blob-1,.blob-2,.blob-3,.blob-4{ filter:blur(28px); animation:none; }
+  .aurora,.aurora-drift{ animation:none; filter:blur(40px); }
   .nav-wrap{ top:.8rem; }
 }
 </style>
 </head>
 
 <body class="bg-ink text-[var(--text)] antialiased">
+
+<!-- Global UnicornStudio aura — fixed ambient layer behind the entire page -->
+<div class="aura-unicorn" id="auraUnicorn" aria-hidden="true">
+  <div data-us-project="ILgOO23w4wEyPQOKyLO4"
+       data-us-scale="0.6"
+       data-us-dpi="1"
+       data-us-fps="24"
+       data-us-production="true"
+       data-us-lazyload="true"
+       data-us-disable-mobile="true"></div>
+  <script>
+    !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head||document.body).appendChild(i)}}();
+  </script>
+</div>
 
 <div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left"
      style="background:linear-gradient(90deg,#6d28d9,#d946ef,#ec4899);transform:scaleX(0);transition:transform 120ms linear;"></div>
@@ -756,7 +820,6 @@ html.se-locked, html.se-locked body{
 
     <div class="hidden md:flex items-center gap-1">
       <a href="#solucoes" class="nav-link">Soluções</a>
-      <a href="#cases"    class="nav-link">Cases</a>
       <a href="#processo" class="nav-link">Processo</a>
       <a href="#planos"   class="nav-link">Planos</a>
       <a href="#contato"  class="nav-link">Contato</a>
@@ -775,20 +838,6 @@ html.se-locked, html.se-locked body{
 <section class="scroll-expand" id="scrollExpand">
   <!-- Fading background (CSS aurora, resolution-independent) -->
   <div class="scroll-expand-bg" id="scrollExpandBg"></div>
-
-  <!-- UnicornStudio aura (Lumina shader, purple via hue-rotate) -->
-  <div class="aura-unicorn" id="auraUnicorn" aria-hidden="true">
-    <div data-us-project="ILgOO23w4wEyPQOKyLO4"
-         data-us-scale="0.6"
-         data-us-dpi="1.25"
-         data-us-fps="30"
-         data-us-production="true"
-         data-us-lazyload="true"
-         data-us-disable-mobile="true"></div>
-    <script>
-      !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head||document.body).appendChild(i)}}();
-    </script>
-  </div>
 
   <!-- 100dvh stage with expanding media frame -->
   <div class="scroll-expand-stage">
@@ -820,7 +869,7 @@ html.se-locked, html.se-locked body{
 </section>
 
 <!-- CLIENTS MARQUEE -->
-<section class="relative py-16 border-y border-white/5">
+<section class="relative py-16">
   <div class="text-center mb-10 reveal">
     <span class="eyebrow">Clientes que já confiaram na Synar</span>
   </div>
@@ -987,34 +1036,51 @@ html.se-locked, html.se-locked body{
         <img src="../Logo sem fundo.png" alt="Synar" decoding="async" />
       </div>
     </div>
+    <!-- 1. APPS (wide frame-1) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-1 tinted">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-1 brand-tile">
+        <div class="bt-label">01 · Nativo</div>
+        <div class="bt-big">Apps.</div>
       </div>
     </div>
+
+    <!-- 2. ESCALE (tall frame-2) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-2 tinted">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-2 brand-tile">
+        <div class="bt-label">— sem atrito</div>
+        <div class="bt-big bt-big--white">Escale<span class="accent">.</span></div>
       </div>
     </div>
+
+    <!-- 3. METRIC (square frame-3) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-3 tinted">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-3 brand-tile">
+        <div class="bt-label">Receita · 30d</div>
+        <div class="bt-big">+287%</div>
       </div>
     </div>
+
+    <!-- 4. AUTO (portrait frame-4) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-4 tinted">
-        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-4 brand-tile">
+        <div class="bt-label">Rodando · 24/7</div>
+        <div class="bt-big">Auto.</div>
       </div>
     </div>
+
+    <!-- 5. INFINITO (wide frame-5) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-5 tinted">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-5 brand-tile">
+        <div class="bt-label">Núcleo · integrado</div>
+        <div class="bt-big bt-big--white"><span class="accent">∞</span></div>
       </div>
     </div>
+
+    <!-- 6. UPTIME (small frame-6) -->
     <div class="zp-item">
-      <div class="zp-frame zp-frame-6 tinted">
-        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      <div class="zp-frame zp-frame-6 brand-tile">
+        <div class="bt-label">Uptime</div>
+        <div class="bt-big">99.9%</div>
       </div>
     </div>
 
@@ -1183,10 +1249,8 @@ html.se-locked, html.se-locked body{
   </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- CLIENTES GRID -->
-<section class="relative py-32 overflow-hidden">
+<section class="relative pt-4 pb-24 overflow-hidden" style="margin-top:-100vh;">
   <div class="absolute inset-0 pointer-events-none">
     <div class="blob blob-2" style="top:20%;right:-10%;opacity:.35"></div>
   </div>
@@ -1631,21 +1695,11 @@ html.se-locked, html.se-locked body{
 
   document.querySelectorAll('.divider, .head-underline, .clip-reveal').forEach(el => io.observe(el));
 
-  /* Pause the UnicornStudio shader when hero is out of viewport (huge GPU savings) */
+  /* Aura is a global fixed layer — always in view. Only pause when tab is hidden. */
   const auraEl = document.getElementById('auraUnicorn');
-  const heroEl = document.getElementById('scrollExpand');
-  if (auraEl && heroEl) {
-    const auraIO = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        /* visibility:hidden keeps the canvas alive (no re-init) but browsers skip WebGL frames */
-        auraEl.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
-      });
-    }, { rootMargin: '100px 0px 100px 0px' });
-    auraIO.observe(heroEl);
-
-    /* Also pause when tab is hidden */
+  if (auraEl) {
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) auraEl.style.visibility = 'hidden';
+      auraEl.style.visibility = document.hidden ? 'hidden' : 'visible';
     });
   }
 
@@ -1664,8 +1718,8 @@ html.se-locked, html.se-locked body{
 
     revealTargets.forEach(el => {
       const rawDelay = getComputedStyle(el).getPropertyValue('--delay').trim();
-      /* Cut stagger delay in half so cascades don't feel slow during fast scroll */
-      const delaySec = rawDelay ? (parseFloat(rawDelay) / 1000) * 0.5 : 0;
+      /* Trim stagger heavily so cascades feel snappy on fast scroll */
+      const delaySec = rawDelay ? (parseFloat(rawDelay) / 1000) * 0.25 : 0;
 
       const isLeft  = el.classList.contains('reveal-l');
       const isRight = el.classList.contains('reveal-r');
@@ -1673,20 +1727,20 @@ html.se-locked, html.se-locked body{
       gsap.fromTo(el,
         {
           opacity: 0,
-          y: (isLeft || isRight) ? 0 : 32,
-          x: isLeft ? -32 : (isRight ? 32 : 0),
+          y: (isLeft || isRight) ? 0 : 24,
+          x: isLeft ? -24 : (isRight ? 24 : 0),
         },
         {
           opacity: 1,
           y: 0,
           x: 0,
-          duration: 0.55,
-          ease: 'power3.out',
+          duration: 0.4,
+          ease: 'power2.out',
           delay: delaySec,
           scrollTrigger: {
             trigger: el,
-            /* 'top bottom' fires the instant element enters viewport — no pre-wait */
-            start: 'top bottom',
+            /* Fire while element is still ~10% below viewport so motion completes by the time it's visible */
+            start: 'top 110%',
             toggleActions: 'play none none none',
           },
         }
@@ -1697,6 +1751,9 @@ html.se-locked, html.se-locked body{
       document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
     window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+    /* Hidden sections (display:none) shrink layout — refresh after paint to recalc triggers */
+    requestAnimationFrame(() => requestAnimationFrame(() => ScrollTrigger.refresh()));
+    setTimeout(() => ScrollTrigger.refresh(), 600);
 
     /* bfcache restore: pages returning from back/forward nav lose ScrollTrigger math */
     window.addEventListener('pageshow', (e) => {
@@ -1716,20 +1773,17 @@ html.se-locked, html.se-locked body{
       }
     });
 
-    /* Final safety net: 3s after full load, force-reveal any element still at opacity:0
-       regardless of whether it's in view — guarantees content is never permanently hidden */
+    /* Safety net: 1.2s after load, force-reveal any element still hidden — covers
+       cases where layout shifts (hidden sections, fonts) made ScrollTrigger miss it */
     window.addEventListener('load', () => {
       setTimeout(() => {
         revealTargets.forEach(el => {
           if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top < window.innerHeight && rect.bottom > 0;
-            if (inView) {
-              gsap.to(el, { opacity: 1, y: 0, x: 0, duration: 0.5, ease: 'power2.out' });
-            }
+            gsap.to(el, { opacity: 1, y: 0, x: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
           }
         });
-      }, 3000);
+        ScrollTrigger.refresh();
+      }, 1200);
     }, { once: true });
   } else {
     document.documentElement.classList.add('no-gsap');
@@ -1776,24 +1830,13 @@ html.se-locked, html.se-locked body{
       const rect = zp.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
       const total = zp.offsetHeight - window.innerHeight;
-      /* Raw progress not capped — lets us read scroll BEYOND animation end
-         to fade the overlay back out during the sticky release phase. */
-      const raw = -rect.top / Math.max(total, 1);
-      const progress = Math.max(0, Math.min(1, raw));
+      const progress = Math.max(0, Math.min(1, -rect.top / Math.max(total, 1)));
       for (let i = 0; i < items.length; i++) {
         const s = 1 + progress * (scales[i % scales.length] - 1);
         items[i].style.setProperty('--s', s.toFixed(3));
       }
-      /* Overlay: climbs 0→1 during 70%–100% of animation, then 1→0 during release (100%–180%).
-         Eliminates the "giant black gap" — viewer sees tiles slide up smoothly into next section. */
-      if (fade) {
-        let f;
-        if (raw < 0.7)      f = 0;
-        else if (raw < 1.0) f = (raw - 0.7) / 0.3;
-        else if (raw < 1.8) f = 1 - (raw - 1.0) / 0.8;
-        else                f = 0;
-        fade.style.setProperty('--fade', Math.max(0, Math.min(1, f)).toFixed(3));
-      }
+      /* Overlay disabled — 300vh container gives enough scroll for smooth transition */
+      if (fade) fade.style.setProperty('--fade', '0');
     };
     window.addEventListener('scroll', () => {
       if (zpTicking) return;
