@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synar | Sites premium e presenca digital</title>
+  <meta
+    name="description"
+    content="Homepage da Synar com identidade roxa gradual, hero interativa, narrativa comercial e acabamento visual premium."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-950: #08010d;
+      --plum-900: #190122;
+      --plum-800: #370149;
+      --secondary-500: #5a0166;
+      --primary-500: #9d01a6;
+      --primary-400: #b11bc9;
+      --pink-hot: #c61bb4;
+      --accent-300: #cb5fd3;
+      --accent-200: #d294d7;
+      --white-100: #f8efff;
+      --white-80: rgba(248, 239, 255, 0.8);
+      --white-72: rgba(248, 239, 255, 0.72);
+      --white-54: rgba(248, 239, 255, 0.54);
+      --white-38: rgba(248, 239, 255, 0.38);
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --panel-900: rgba(16, 6, 24, 0.78);
+      --panel-800: rgba(36, 15, 52, 0.78);
+      --success: #5ef2b8;
+      --warning: #ffb84d;
+      --danger: #ff6aa2;
+      --gradient-brand: linear-gradient(
+        135deg,
+        #190122 0%,
+        #5a0166 20%,
+        #9d01a6 46%,
+        #b11bc9 65%,
+        #cb5fd3 82%,
+        #d294d7 100%
+      );
+      --gradient-button: linear-gradient(
+        135deg,
+        #e457ff 0%,
+        #be24ff 28%,
+        #9208eb 60%,
+        #6500b9 100%
+      );
+      --gradient-line: linear-gradient(
+        180deg,
+        rgba(210, 148, 215, 0),
+        rgba(203, 95, 211, 0.92),
+        rgba(157, 1, 166, 0)
+      );
+      --shadow-glow:
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 12px 40px rgba(8, 1, 13, 0.3),
+        0 30px 90px rgba(122, 0, 185, 0.34);
+      --shadow-card:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 24px 60px rgba(7, 0, 10, 0.32);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --max: 1240px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --font-primary: "Space Grotesk", "Segoe UI", sans-serif;
+      --font-body: "Manrope", "Segoe UI", sans-serif;
+      --font-mono: "Space Mono", "Cascadia Code", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-950);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--white-100);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, rgba(210, 148, 215, 0.14), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(177, 27, 201, 0.18), transparent 24%),
+        linear-gradient(180deg, #09010d 0%, #08010d 42%, #060109 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      background:
+        linear-gradient(180deg, rgba(6, 1, 10, 0.54), rgba(6, 1, 10, 0.76)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      opacity: 0.44;
+      transform: scale(1.05);
+      filter: saturate(1.06) contrast(1.02);
+      animation: bg-drift 18s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 104px 104px;
+      mask-image: radial-gradient(circle at center, black 58%, transparent 92%);
+      opacity: 0.24;
+      pointer-events: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .aura-background-component {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      overflow: hidden;
+      opacity: 0.9;
+    }
+
+    .aura-background-component::before,
+    .aura-background-component::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(42px);
+      background: radial-gradient(circle, rgba(203, 95, 211, 0.55), transparent 72%);
+      animation: float-orb 14s ease-in-out infinite;
+    }
+
+    .aura-background-component::before {
+      width: 34rem;
+      height: 34rem;
+      top: -8rem;
+      right: -10rem;
+    }
+
+    .aura-background-component::after {
+      width: 28rem;
+      height: 28rem;
+      bottom: 6rem;
+      left: -8rem;
+      animation-delay: -6s;
+      opacity: 0.72;
+    }
+
+    .grid-columns {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      max-width: min(var(--max), calc(100vw - 2rem));
+      margin: 0 auto;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.58;
+    }
+
+    .grid-columns span {
+      position: relative;
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .grid-columns span:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .grid-columns span::after {
+      content: "";
+      position: absolute;
+      top: -18rem;
+      left: -1px;
+      width: 1px;
+      height: 16rem;
+      background: var(--gradient-line);
+      animation: beam-fall 12s linear infinite;
+      opacity: 0;
+    }
+
+    .grid-columns span:nth-child(2)::after {
+      animation-delay: 1.4s;
+      height: 20rem;
+    }
+
+    .grid-columns span:nth-child(3)::after {
+      animation-delay: 3.6s;
+      height: 28rem;
+    }
+
+    .grid-columns span:nth-child(4)::after {
+      animation-delay: 5.2s;
+    }
+
+    .grid-columns span:nth-child(5)::after {
+      animation-delay: 7.1s;
+      height: 22rem;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      z-index: 80;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+    }
+
+    .scroll-progress > i {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #cb5fd3, #e457ff, #7d11ff);
+      box-shadow: 0 0 18px rgba(228, 87, 255, 0.62);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 70;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 1, 14, 0.58);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .topbar-inner,
+    .section-inner,
+    .footer-inner {
+      width: min(var(--max), calc(100vw - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-glow);
+      flex: none;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 0.18rem;
+    }
+
+    .brand-copy strong {
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-copy span {
+      color: var(--white-54);
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      color: var(--white-54);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.3s var(--ease-out);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.35rem;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+      transform: scaleX(0.2);
+      opacity: 0;
+      transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+      transform-origin: center;
+    }
+
+    .nav-links a:hover {
+      color: var(--white-100);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    .nav-badge,
+    .hero-label,
+    .hero-chip,
+    .metric-chip,
+    .code-chip,
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      white-space: nowrap;
+    }
+
+    .nav-badge {
+      padding: 0.65rem 0.95rem;
+      color: #f4c6ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-badge i,
+    .hero-chip i,
+    .metric-chip i,
+    .badge i {
+      display: inline-block;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd7ff, #cb5fd3);
+      box-shadow: 0 0 16px rgba(255, 215, 255, 0.7);
+      flex: none;
+    }
+
+    .section-shell {
+      position: relative;
+      padding: 4.8rem 0;
+    }
+
+    .section-shell::before,
+    .section-shell::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .section-shell::before {
+      width: 26rem;
+      height: 26rem;
+      top: -10rem;
+      right: -10rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(177, 27, 201, 0.14), transparent 66%);
+    }
+
+    .section-shell::after {
+      width: 18rem;
+      height: 18rem;
+      bottom: -9rem;
+      left: -6rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(210, 148, 215, 0.12), transparent 72%);
+    }
+
+    .section-heading {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      max-width: 46rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--accent-200);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.5rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9));
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: clamp(2.35rem, 4vw, 4.65rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 42rem;
+      color: var(--white-72);
+      font-size: 1.04rem;
+      line-height: 1.75;
+    }
+
+    .hero {
+      min-height: calc(100dvh - 78px);
+      padding-top: 5rem;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      --hero-pos-x: 0;
+      --hero-pos-y: 0;
+    }
+
+    .hero-interactive-bg {
+      position: absolute;
+      inset: -8%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.92;
+      background:
+        linear-gradient(115deg, rgb(25 1 34), rgb(6 1 9)),
+        radial-gradient(
+          90% 100% at calc(50% + var(--hero-pos-x) * 1px) calc(0% + var(--hero-pos-y) * 1px),
+          rgba(210, 148, 215, 0.88),
+          rgba(22, 0, 45, 0.1) 48%,
+          transparent 68%
+        ),
+        radial-gradient(
+          100% 100% at calc(82% - var(--hero-pos-x) * 1px) calc(2% - var(--hero-pos-y) * 1px),
+          rgba(177, 27, 201, 0.84),
+          rgba(36, 0, 40, 0.12) 44%,
+          transparent 66%
+        ),
+        radial-gradient(
+          150% 210% at calc(100% + var(--hero-pos-x) * 1px) calc(0% + var(--hero-pos-y) * 1px),
+          rgba(157, 1, 166, 0.7),
+          rgba(55, 1, 73, 0.18) 42%,
+          transparent 68%
+        ),
+        radial-gradient(
+          100% 100% at calc(100% - var(--hero-pos-x) * 1px) calc(36% - var(--hero-pos-y) * 1px),
+          rgba(203, 95, 211, 0.58),
+          rgba(25, 1, 34, 0.14) 40%,
+          transparent 62%
+        ),
+        linear-gradient(60deg, rgb(55 1 73), rgb(177 27 201) 55%, rgb(25 1 34));
+      background-blend-mode: overlay, screen, screen, soft-light, soft-light, normal;
+      filter: saturate(1.08) contrast(1.02);
+      transform: scale(1.06);
+    }
+
+    .hero-interactive-bg::before,
+    .hero-interactive-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-interactive-bg::before {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.16), transparent 20%),
+        radial-gradient(circle at 78% 68%, rgba(255, 255, 255, 0.08), transparent 22%);
+      mix-blend-mode: screen;
+      opacity: 0.88;
+    }
+
+    .hero-interactive-bg::after {
+      background: linear-gradient(180deg, rgba(8, 1, 13, 0.06), rgba(8, 1, 13, 0.36) 45%, rgba(8, 1, 13, 0.82));
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 1.35rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      padding: 0.55rem 0.85rem;
+      width: fit-content;
+      color: #f4d1ff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-label i {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f5b6ff, #be24ff);
+      box-shadow: 0 0 18px rgba(245, 182, 255, 0.78);
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: clamp(3.6rem, 7vw, 7.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      max-width: 11ch;
+    }
+
+    .text-glow {
+      text-shadow:
+        0 0 30px rgba(255, 255, 255, 0.08),
+        0 0 70px rgba(190, 36, 255, 0.14);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 40rem;
+      color: var(--white-72);
+      font-size: 1.08rem;
+      line-height: 1.82;
+    }
+
+    .accent-line {
+      display: inline;
+      color: #ffd9ff;
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0));
+      background-repeat: no-repeat;
+      background-size: 100% 1px;
+      background-position: 0 100%;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .button-custom,
+    .btn-beam-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      min-height: 52px;
+      isolation: isolate;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+    }
+
+    .button-custom:hover,
+    .btn-beam-container:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-custom {
+      padding: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 218, 255, 0.48) 0%, rgba(255, 218, 255, 0) 100%),
+        var(--gradient-button);
+      box-shadow:
+        0 16px 36px rgba(144, 0, 201, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .button-custom::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 48%);
+      z-index: 0;
+    }
+
+    .button-custom::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: inherit;
+      background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 218, 255, 0.42) 0%, rgba(255, 218, 255, 0) 100%),
+        linear-gradient(135deg, rgba(228, 87, 255, 0.92), rgba(101, 0, 185, 0.9));
+      z-index: 0;
+    }
+
+    .points_wrapper {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .points_wrapper .point {
+      position: absolute;
+      bottom: -10px;
+      width: 2px;
+      height: 2px;
+      border-radius: 999px;
+      background: white;
+      animation: floating-points infinite ease-in-out;
+    }
+
+    .points_wrapper .point:nth-child(1) { left: 10%; animation-duration: 2.2s; animation-delay: 0.2s; }
+    .points_wrapper .point:nth-child(2) { left: 20%; animation-duration: 2.8s; animation-delay: 0.6s; opacity: 0.7; }
+    .points_wrapper .point:nth-child(3) { left: 34%; animation-duration: 2s; animation-delay: 0.1s; }
+    .points_wrapper .point:nth-child(4) { left: 48%; animation-duration: 2.4s; }
+    .points_wrapper .point:nth-child(5) { left: 58%; animation-duration: 1.85s; }
+    .points_wrapper .point:nth-child(6) { left: 74%; animation-duration: 2.6s; animation-delay: 1s; opacity: 0.55; }
+    .points_wrapper .point:nth-child(7) { left: 88%; animation-duration: 2.15s; animation-delay: 0.25s; }
+
+    .inner,
+    .btn-beam {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      padding: 0.95rem 1.45rem;
+      border-radius: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .inner svg,
+    .btn-beam svg,
+    .icon-wrap svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s var(--ease-out);
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .button-custom:hover .inner svg,
+    .btn-beam-container:hover .btn-beam svg {
+      transform: translateX(2px);
+    }
+
+    .btn-beam-container {
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-beam {
+      background: rgba(19, 6, 28, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .beam-border {
+      position: absolute;
+      inset: -1px;
+      z-index: 1;
+      border-radius: inherit;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.7) 80deg,
+        transparent 150deg,
+        transparent 360deg
+      );
+      opacity: 0;
+      animation: rotate-beam 2.6s linear infinite;
+      transition: opacity 0.35s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .btn-beam-container:hover .beam-border {
+      opacity: 1;
+    }
+
+    .hero-stats,
+    .metric-grid,
+    .cards-grid,
+    .quote-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+
+    .metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cards-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .quote-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat-card,
+    .metric-box {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: var(--font-primary);
+      font-size: clamp(1.55rem, 2.4vw, 2rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-card span,
+    .metric-box span,
+    .metric-box p {
+      color: var(--white-54);
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .metric-box strong {
+      display: block;
+      font-family: var(--font-primary);
+      font-size: 1.18rem;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 43rem;
+      transform-style: preserve-3d;
+      perspective: 1400px;
+      display: grid;
+      place-items: center;
+    }
+
+    .perspective-distant {
+      perspective: 1200px;
+    }
+
+    .transform-style-preserve-3d {
+      transform-style: preserve-3d;
+    }
+
+    .hero-sphere {
+      position: absolute;
+      inset: 2rem 2rem 2.5rem;
+      border-radius: 42px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(12, 3, 19, 0.08), rgba(12, 3, 19, 0.58)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      box-shadow: var(--shadow-glow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform:
+        rotateX(calc(var(--tilt-y, 0) * -1deg))
+        rotateY(calc(var(--tilt-x, 0) * 1deg));
+      transition: transform 0.25s var(--ease-out);
+    }
+
+    .hero-sphere::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.38), transparent 20%),
+        radial-gradient(circle at 74% 72%, rgba(255, 255, 255, 0.16), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+      mix-blend-mode: screen;
+    }
+
+    .hero-sphere::after {
+      content: "";
+      position: absolute;
+      inset: 1.15rem;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      opacity: 0.45;
+    }
+
+    .hero-logo-shell {
+      position: absolute;
+      inset: 50%;
+      width: min(16rem, 40vw);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04)),
+        rgba(28, 8, 37, 0.36);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 90px rgba(190, 36, 255, 0.34),
+        0 30px 80px rgba(8, 1, 13, 0.35);
+      backdrop-filter: blur(18px);
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-logo-shell::before {
+      content: "";
+      position: absolute;
+      inset: -0.8rem;
+      border-radius: inherit;
+      border: 1px solid rgba(210, 148, 215, 0.18);
+      opacity: 0.7;
+      animation: spin-slow 15s linear infinite;
+    }
+
+    .hero-logo-shell::after {
+      content: "";
+      position: absolute;
+      inset: -1.55rem;
+      border-radius: inherit;
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      opacity: 0.46;
+      animation: spin-slow 26s linear infinite reverse;
+    }
+
+    .hero-logo-shell img {
+      width: 74%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 999px;
+      box-shadow: 0 14px 40px rgba(8, 1, 13, 0.34);
+    }
+
+    .hero-ring {
+      position: absolute;
+      inset: 12% 11%;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      mask-image: linear-gradient(180deg, transparent, black 12%, black 88%, transparent);
+      animation: pulse-ring 7s ease-in-out infinite;
+    }
+
+    .hero-chip {
+      position: absolute;
+      padding: 0.72rem 0.92rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #f5d6ff;
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-chip.one { top: 4.5rem; left: 1rem; }
+    .hero-chip.two { top: 8rem; right: 0.5rem; }
+    .hero-chip.three { bottom: 6rem; left: 0.5rem; }
+    .hero-chip.four { bottom: 3rem; right: 2.25rem; }
+
+    .metric-cluster {
+      position: absolute;
+      top: 2.4rem;
+      right: 2rem;
+      display: grid;
+      gap: 0.8rem;
+      width: min(15rem, 42vw);
+    }
+
+    .metric-chip {
+      padding: 0.8rem 0.95rem;
+      justify-content: space-between;
+      box-shadow: var(--shadow-card);
+    }
+
+    .metric-chip .metric-copy {
+      display: grid;
+      gap: 0.18rem;
+    }
+
+    .metric-chip span {
+      color: var(--white-54);
+      font-size: 0.82rem;
+    }
+
+    .metric-chip strong {
+      font-family: var(--font-primary);
+      font-size: 1.15rem;
+      letter-spacing: -0.04em;
+    }
+
+    .metric-chip mark {
+      background: transparent;
+      color: #ffd7ff;
+      font-weight: 700;
+    }
+
+    .card-stack {
+      position: absolute;
+      right: 2rem;
+      bottom: 1.5rem;
+      width: min(19rem, 50vw);
+      height: 14rem;
+    }
+
+    .card-stack-item {
+      position: absolute;
+      inset: 0;
+      padding: 1.2rem;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        rgba(14, 4, 22, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-card);
+      transition:
+        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.45s ease,
+        filter 0.45s ease,
+        z-index 0s;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .card-stack-item h3,
+    .feature-card h3,
+    .service-copy h3,
+    .showcase-copy h3,
+    .process-step h3,
+    .quote-card h3,
+    .faq-intro h3,
+    .cta-panel h3,
+    .modal-body h3 {
+      margin: 0;
+      font-family: var(--font-primary);
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+    }
+
+    .card-stack-item h3 {
+      font-size: 1.28rem;
+    }
+
+    .card-stack-item p,
+    .feature-card p,
+    .service-copy p,
+    .showcase-copy p,
+    .process-step p,
+    .quote-card p,
+    .faq-intro p,
+    .cta-panel p,
+    .modal-body p {
+      margin: 0;
+      color: var(--white-72);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .card-stack-item .mini-list {
+      display: grid;
+      gap: 0.5rem;
+      color: var(--white-54);
+      font-size: 0.82rem;
+    }
+
+    .card-stack-item .mini-list span,
+    .process-step ul li,
+    .faq-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .card-stack-item .mini-list span::before,
+    .process-step ul li::before,
+    .faq-list li::before {
+      content: "";
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd7ff, #9d01a6);
+      box-shadow: 0 0 12px rgba(255, 215, 255, 0.55);
+      flex: none;
+    }
+
+    .card-stack-item:nth-child(1) {
+      transform: translate3d(0, 0, 0) rotate(-1.5deg);
+      z-index: 3;
+    }
+
+    .card-stack-item:nth-child(2) {
+      transform: translate3d(-0.45rem, 1.2rem, -40px) rotate(3deg);
+      z-index: 2;
+      opacity: 0.85;
+    }
+
+    .card-stack-item:nth-child(3) {
+      transform: translate3d(-0.85rem, 2.2rem, -80px) rotate(-3deg);
+      z-index: 1;
+      opacity: 0.65;
+    }
+
+    .card-stack-item.is-active {
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 22px 50px rgba(8, 1, 13, 0.3),
+        0 0 80px rgba(190, 36, 255, 0.22);
+    }
+
+    .marquee-band {
+      padding: 0.8rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .marquee-mask {
+      mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    }
+
+    .marquee-content {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: scroll-left 28s linear infinite;
+    }
+
+    .marquee-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.68rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white-72);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .marquee-pill::before {
+      content: "";
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d294d7, #9d01a6);
+      box-shadow: 0 0 12px rgba(210, 148, 215, 0.7);
+    }
+
+    .two-col,
+    .showcase-grid,
+    .faq-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .two-col {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      align-items: start;
+    }
+
+    .service-stack,
+    .portfolio-grid,
+    .result-strip,
+    .contact-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .service-stack {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .showcase-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: stretch;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .result-strip {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: start;
+    }
+
+    .flashlight-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(14, 4, 22, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+      isolation: isolate;
+    }
+
+    .flashlight-card::before,
+    .flashlight-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .flashlight-card::before {
+      background:
+        radial-gradient(
+          460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(255, 255, 255, 0.08),
+          transparent 42%
+        );
+      z-index: 0;
+    }
+
+    .flashlight-card::after {
+      background:
+        radial-gradient(
+          300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(255, 255, 255, 0.13),
+          transparent 42%
+        );
+      mix-blend-mode: screen;
+      z-index: 1;
+    }
+
+    .flashlight-card:hover::before,
+    .flashlight-card:hover::after,
+    .flashlight-card:hover .flashlight-border {
+      opacity: 1;
+    }
+
+    .flashlight-border {
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background:
+        radial-gradient(
+          320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(255, 255, 255, 0.65),
+          transparent 45%
+        );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .feature-card,
+    .service-copy,
+    .service-preview,
+    .showcase-panel,
+    .showcase-copy,
+    .process-step,
+    .quote-card,
+    .faq-intro,
+    .faq-panel,
+    .cta-panel {
+      padding: 1.35rem;
+    }
+
+    .feature-card {
+      min-height: 16rem;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .portfolio-card,
+    .result-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+    }
+
+    .portfolio-card {
+      min-height: 20rem;
+      padding: 1.25rem;
+      display: grid;
+      align-content: end;
+      gap: 0.6rem;
+      background:
+        linear-gradient(180deg, rgba(9, 1, 13, 0.12), rgba(9, 1, 13, 0.78)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+    }
+
+    .portfolio-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 30%);
+      pointer-events: none;
+    }
+
+    .portfolio-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .portfolio-card span {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(248, 239, 255, 0.74);
+    }
+
+    .portfolio-card h3 {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: 1.55rem;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      max-width: 10ch;
+    }
+
+    .portfolio-card p {
+      margin: 0;
+      color: var(--white-80);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 24rem;
+    }
+
+    .result-card {
+      padding: 1rem 1.05rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(14, 4, 22, 0.76);
+    }
+
+    .result-card strong {
+      display: block;
+      font-family: var(--font-primary);
+      font-size: 1.7rem;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .result-card span {
+      color: var(--white-54);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .icon-wrap,
+    .process-index,
+    .quote-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: inline-grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04)),
+        rgba(129, 17, 174, 0.26);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 28px rgba(10, 1, 16, 0.25);
+      color: white;
+      font-family: var(--font-primary);
+      font-weight: 700;
+    }
+
+    .badge-row,
+    .code-row,
+    .metric-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .badge,
+    .code-chip {
+      padding: 0.58rem 0.85rem;
+      color: #f8d4ff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .badge.success { background: rgba(94, 242, 184, 0.12); color: #d2ffe7; }
+    .badge.warning { background: rgba(255, 184, 77, 0.12); color: #ffe3b8; }
+    .badge.danger { background: rgba(255, 106, 162, 0.12); color: #ffd1e2; }
+
+    .code-chip code {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .service-preview {
+      min-height: 34rem;
+    }
+
+    .brand-preview {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      min-height: 100%;
+      background:
+        linear-gradient(180deg, rgba(10, 2, 14, 0.18), rgba(10, 2, 14, 0.56)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .brand-preview::before {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .brand-preview::after {
+      content: "";
+      position: absolute;
+      inset: auto 1.2rem 1.2rem 1.2rem;
+      height: 32%;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(8, 1, 13, 0), rgba(8, 1, 13, 0.88));
+    }
+
+    .preview-logo {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      width: 66px;
+      height: 66px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(8, 1, 13, 0.25);
+    }
+
+    .preview-copy {
+      position: absolute;
+      inset: auto 1.5rem 1.5rem 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+      z-index: 1;
+    }
+
+    .preview-copy span {
+      font-size: 0.74rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(248, 239, 255, 0.78);
+    }
+
+    .preview-copy strong {
+      font-family: var(--font-primary);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 10ch;
+    }
+
+    .preview-copy p {
+      margin: 0;
+      max-width: 26rem;
+      color: var(--white-72);
+      line-height: 1.7;
+    }
+
+    .service-copy,
+    .showcase-copy,
+    .faq-intro {
+      display: grid;
+      gap: 1rem;
+      min-height: 100%;
+      align-content: start;
+    }
+
+    .reference-note {
+      padding: 1rem 1.1rem;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--white-72);
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--white-54);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .contact-list li::before {
+      content: "";
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd7ff, #9d01a6);
+      box-shadow: 0 0 12px rgba(255, 215, 255, 0.55);
+      flex: none;
+    }
+
+    .showcase-panel {
+      min-height: 38rem;
+    }
+
+    .showcase-ui {
+      display: grid;
+      gap: 1rem;
+      min-height: 100%;
+    }
+
+    .dashboard-shell {
+      position: relative;
+      min-height: 22rem;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(10, 3, 16, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+    }
+
+    .dashboard-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(210, 148, 215, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 34%);
+      pointer-events: none;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .dashboard-nav .dots {
+      display: flex;
+      gap: 0.38rem;
+    }
+
+    .dashboard-nav .dots span {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .dashboard-nav strong {
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-54);
+    }
+
+    .dashboard-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .dashboard-column {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .dashboard-card {
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      min-height: 8.6rem;
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .dashboard-card.hero-card {
+      background:
+        linear-gradient(180deg, rgba(9, 1, 13, 0.12), rgba(9, 1, 13, 0.68)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      min-height: 13rem;
+    }
+
+    .dashboard-card.hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 1, 13, 0.1), rgba(9, 1, 13, 0.82));
+    }
+
+    .dashboard-card.hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .dashboard-card strong {
+      font-family: var(--font-primary);
+      font-size: 1.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .dashboard-card p {
+      color: var(--white-72);
+      line-height: 1.65;
+      margin: 0;
+      font-size: 0.88rem;
+    }
+
+    .bar-list {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .bar-list span {
+      display: grid;
+      gap: 0.32rem;
+    }
+
+    .bar-list i {
+      display: block;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .bar-list i::after {
+      content: "";
+      display: block;
+      height: 100%;
+      width: var(--fill, 70%);
+      border-radius: inherit;
+      background: var(--gradient-button);
+      box-shadow: 0 0 14px rgba(228, 87, 255, 0.3);
+    }
+
+    .phone-shell {
+      margin-left: auto;
+      width: min(14rem, 100%);
+      border-radius: 28px;
+      padding: 0.7rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03)),
+        rgba(12, 3, 18, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+    }
+
+    .phone-screen {
+      min-height: 21rem;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8, 1, 13, 0.15), rgba(8, 1, 13, 0.72)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      align-content: space-between;
+      padding: 1rem;
+    }
+
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(248, 239, 255, 0.8);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .phone-card {
+      display: grid;
+      gap: 0.55rem;
+      padding: 0.9rem;
+      border-radius: 18px;
+      background: rgba(10, 3, 15, 0.56);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .phone-card strong {
+      font-family: var(--font-primary);
+      font-size: 1.24rem;
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .phone-card p {
+      margin: 0;
+      color: rgba(248, 239, 255, 0.78);
+      font-size: 0.82rem;
+      line-height: 1.62;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .process-step {
+      display: grid;
+      gap: 1rem;
+      min-height: 18rem;
+      align-content: start;
+    }
+
+    .process-index {
+      font-size: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .process-step ul,
+    .faq-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.52rem;
+      color: var(--white-54);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .quote-card {
+      display: grid;
+      gap: 1rem;
+      min-height: 16rem;
+      align-content: start;
+    }
+
+    .quote-mark {
+      font-size: 1.6rem;
+    }
+
+    .quote-card h3 {
+      font-size: 1.2rem;
+    }
+
+    .quote-card footer {
+      margin-top: auto;
+      color: var(--white-54);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .faq-panel {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    details.faq-item {
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+    }
+
+    details.faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.1rem;
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    details.faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 1.2rem;
+      color: #ffd7ff;
+      transition: transform 0.25s var(--ease-out);
+    }
+
+    details.faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    details.faq-item p {
+      padding: 0 1.1rem 1rem;
+      margin: 0;
+      color: var(--white-72);
+      line-height: 1.75;
+    }
+
+    .field-stack {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .field-stack label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f7d2ff;
+    }
+
+    .field-stack input {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(11, 3, 16, 0.74);
+      color: var(--white-100);
+      outline: none;
+      transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+    }
+
+    .field-stack input:focus {
+      transform: translateY(-1px);
+      border-color: rgba(210, 148, 215, 0.55);
+      box-shadow:
+        0 0 0 4px rgba(177, 27, 201, 0.14),
+        0 14px 35px rgba(6, 1, 10, 0.28);
+    }
+
+    .field-stack input::placeholder {
+      color: rgba(248, 239, 255, 0.34);
+    }
+
+    .helper-text {
+      color: var(--white-54);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .cta-panel {
+      display: grid;
+      gap: 1rem;
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8, 1, 13, 0.12), rgba(8, 1, 13, 0.72)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.24), transparent 24%),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 34%);
+      pointer-events: none;
+    }
+
+    .cta-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-panel h3 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      max-width: 12ch;
+    }
+
+    .cta-panel p {
+      max-width: 42rem;
+      color: rgba(248, 239, 255, 0.82);
+      line-height: 1.8;
+    }
+
+    .footer-inner {
+      padding: 0 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: var(--white-54);
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.4rem;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+      background: rgba(5, 1, 8, 0.72);
+      backdrop-filter: blur(18px);
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s var(--ease-out), visibility 0.35s var(--ease-out);
+    }
+
+    .modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-panel {
+      width: min(38rem, 100%);
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(12, 3, 18, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 30px 100px rgba(8, 1, 13, 0.5),
+        0 0 100px rgba(190, 36, 255, 0.15);
+      transform: translateY(20px) scale(0.98);
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    .modal-overlay.is-open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-top {
+      position: relative;
+      min-height: 15rem;
+      padding: 1.25rem;
+      background:
+        linear-gradient(180deg, rgba(8, 1, 13, 0.08), rgba(8, 1, 13, 0.58)),
+        url("../Fundo gradual ID visual.jpeg") center/cover no-repeat;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-top img {
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      box-shadow: 0 18px 35px rgba(8, 1, 13, 0.28);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(9, 1, 14, 0.52);
+      color: white;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal-body {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .modal-body h3 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 0.98;
+    }
+
+    .modal-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .modal-list span {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.82rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--white-72);
+    }
+
+    .modal-list span::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffd7ff, #c61bb4);
+      box-shadow: 0 0 12px rgba(255, 215, 255, 0.72);
+      flex: none;
+    }
+
+    .animate-on-scroll {
+      opacity: 0.01;
+      filter: blur(12px);
+      transform: translateY(26px);
+      transition:
+        opacity 0.8s var(--ease-smooth),
+        filter 0.8s var(--ease-smooth),
+        transform 0.8s var(--ease-smooth);
+    }
+
+    .animate-on-scroll.animate,
+    .animate-on-scroll.in-view {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    @keyframes bg-drift {
+      0% { transform: scale(1.05) translate3d(0, 0, 0); }
+      100% { transform: scale(1.1) translate3d(-1.5%, 1.25%, 0); }
+    }
+
+    @keyframes float-orb {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(2rem, -1rem, 0) scale(1.08); }
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.82; }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(0.96); opacity: 0.4; }
+      50% { transform: scale(1.02); opacity: 0.72; }
+    }
+
+    @keyframes floating-points {
+      0% { transform: translateY(0); opacity: 1; }
+      85% { opacity: 0; }
+      100% { transform: translateY(-58px); opacity: 0; }
+    }
+
+    @keyframes beam-fall {
+      0% { transform: translateY(-100%); opacity: 0; }
+      10% { opacity: 0.5; }
+      50% { opacity: 1; }
+      90% { opacity: 0.35; }
+      100% { transform: translateY(150vh); opacity: 0; }
+    }
+
+    @keyframes rotate-beam {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .two-col,
+      .showcase-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-stack,
+      .portfolio-grid,
+      .result-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-visual {
+        min-height: 37rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .section-shell {
+        padding: 3.8rem 0;
+      }
+
+      .hero-stats,
+      .cards-grid,
+      .metric-grid,
+      .quote-grid,
+      .service-stack,
+      .portfolio-grid,
+      .result-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+
+      .metric-cluster {
+        right: 1rem;
+        width: min(14rem, 48vw);
+      }
+
+      .hero-chip.one { top: 1rem; left: 1rem; }
+      .hero-chip.two { top: 4.8rem; right: 1rem; }
+      .hero-chip.three { left: 1rem; bottom: 1rem; }
+      .hero-chip.four { right: 1rem; bottom: 5.3rem; }
+
+      .card-stack {
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+        bottom: 1rem;
+      }
+
+      .hero-sphere {
+        inset: 4.4rem 0.4rem 0.4rem;
+      }
+
+      .hero-logo-shell {
+        width: 12rem;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body::after,
+      .grid-columns {
+        display: none;
+      }
+
+      .topbar-inner,
+      .section-inner,
+      .footer-inner {
+        width: min(var(--max), calc(100vw - 1.2rem));
+      }
+
+      .hero-copy p,
+      .section-heading p {
+        font-size: 0.98rem;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(3rem, 16vw, 4.7rem);
+      }
+
+      .hero-visual {
+        min-height: 33rem;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .button-custom,
+      .btn-beam-container {
+        width: 100%;
+      }
+
+      .inner,
+      .btn-beam {
+        width: 100%;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"><i id="scroll-progress-bar"></i></div>
+  <div class="aura-background-component" aria-hidden="true"></div>
+  <div class="grid-columns" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand-lockup" href="#hero" aria-label="Ir para o topo">
+          <span class="brand-mark">
+            <img src="../Logo sem fundo.png" alt="Logo da Synar" />
+          </span>
+          <span class="brand-copy">
+            <strong>Synar / Digital Presence</strong>
+            <span>sites premium | identidade | conversao</span>
+          </span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegacao principal">
+          <a href="#hero">Inicio</a>
+          <a href="#capabilities">Diferenciais</a>
+          <a href="#services">Servicos</a>
+          <a href="#showcase">Projetos</a>
+          <a href="#process">Processo</a>
+          <a href="#cta">Contato</a>
+        </nav>
+
+        <span class="nav-badge"><i></i> synar homepage</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="section-shell hero" id="hero">
+        <div class="hero-interactive-bg" aria-hidden="true"></div>
+        <div class="section-inner hero-grid">
+          <div class="hero-copy">
+            <span class="hero-label animate-on-scroll"><i></i> synar studio digital premium</span>
+            <h1 class="text-glow animate-on-scroll">
+              Sites que fazem a sua marca
+              <span class="accent-line">parecer maior antes do segundo scroll.</span>
+            </h1>
+            <p class="animate-on-scroll">
+              A Synar cria presenca digital premium para marcas que precisam parecer fortes,
+              modernas e desejaveis. Unimos direcao visual, copy comercial e motion elegante para
+              transformar identidade em um site que passa valor logo na primeira dobra.
+            </p>
+
+            <div class="cta-row animate-on-scroll">
+              <a class="button-custom" href="#capabilities">
+                <span class="points_wrapper" aria-hidden="true">
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span>
+                </span>
+                <span class="inner">
+                  Conhecer a Synar
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </a>
+
+              <button class="btn-beam-container" type="button" data-open-modal>
+                <span class="beam-border" aria-hidden="true"></span>
+                <span class="btn-beam">
+                  Solicitar briefing
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5l8 7-8 7" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-card animate-on-scroll">
+                <strong>03 frentes</strong>
+                <span>identidade, narrativa e conversao trabalhando juntas.</span>
+              </div>
+              <div class="stat-card animate-on-scroll">
+                <strong>100%</strong>
+                <span>experiencia pensada para desktop, tablet e mobile.</span>
+              </div>
+              <div class="stat-card animate-on-scroll">
+                <strong>01 foco</strong>
+                <span>fazer a marca parecer mais forte, clara e confiavel.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual perspective-distant transform-style-preserve-3d animate-on-scroll" id="hero-canvas">
+            <div class="hero-sphere flashlight-card" id="hero-sphere">
+              <div class="flashlight-border"></div>
+            </div>
+            <div class="hero-ring" aria-hidden="true"></div>
+
+            <div class="hero-logo-shell">
+              <img src="../Logo sem fundo.png" alt="Simbolo da Synar" />
+            </div>
+
+            <span class="hero-chip one"><i></i> visual premium</span>
+            <span class="hero-chip two"><i></i> motion com glow</span>
+            <span class="hero-chip three"><i></i> narrativa clara</span>
+            <span class="hero-chip four"><i></i> mobile first</span>
+
+            <div class="metric-cluster">
+              <div class="metric-chip">
+                <div class="metric-copy">
+                  <span>Posicionamento</span>
+                  <strong>marca forte desde o topo</strong>
+                </div>
+                <i></i>
+              </div>
+              <div class="metric-chip">
+                <div class="metric-copy">
+                  <span>Atmosfera</span>
+                  <strong><mark>degrade</mark> roxo vivo e memoravel</strong>
+                </div>
+                <i></i>
+              </div>
+              <div class="metric-chip">
+                <div class="metric-copy">
+                  <span>Acao</span>
+                  <strong>cta nos pontos certos da jornada</strong>
+                </div>
+                <i></i>
+              </div>
+            </div>
+
+            <div class="card-stack" aria-label="pilha visual da experiencia">
+              <article class="card-stack-item is-active" data-stack-card>
+                <span class="eyebrow">Primeira dobra</span>
+                <h3>A hero da Synar prende o olhar e entrega valor em poucos segundos.</h3>
+                <p>
+                  Logo, glow, contraste e profundidade entram juntos para criar uma chegada que
+                  parece premium sem precisar exagerar na interface.
+                </p>
+                <div class="mini-list">
+                  <span>logo como ancora visual</span>
+                  <span>headline com impacto comercial</span>
+                  <span>cta evidente sem poluicao</span>
+                </div>
+              </article>
+
+              <article class="card-stack-item" data-stack-card>
+                <span class="eyebrow">Estrutura</span>
+                <h3>As secoes seguintes sustentam a promessa sem virar um catalogo frio.</h3>
+                <p>
+                  O visitante entende o que a Synar faz, como trabalha e por que essa assinatura
+                  visual aumenta a percepcao de valor da marca.
+                </p>
+                <div class="mini-list">
+                  <span>servicos bem posicionados</span>
+                  <span>blocos com profundidade</span>
+                  <span>copy curta e objetiva</span>
+                </div>
+              </article>
+
+              <article class="card-stack-item" data-stack-card>
+                <span class="eyebrow">Conversao</span>
+                <h3>Contato e CTA entram como parte da experiencia, nao como um anexo.</h3>
+                <p>
+                  O fechamento continua a mesma linguagem do topo e deixa o proximo passo natural,
+                  elegante e coerente com a marca.
+                </p>
+                <div class="mini-list">
+                  <span>modal com contexto</span>
+                  <span>cta final com glow</span>
+                  <span>continuidade visual total</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="marquee-band marquee-mask">
+        <div class="marquee-content">
+          <span class="marquee-pill">Sites premium</span>
+          <span class="marquee-pill">Glow roxo gradual</span>
+          <span class="marquee-pill">Direcao visual</span>
+          <span class="marquee-pill">Copy comercial</span>
+          <span class="marquee-pill">Motion elegante</span>
+          <span class="marquee-pill">Landing pages</span>
+          <span class="marquee-pill">Brand presence</span>
+          <span class="marquee-pill">UX responsiva</span>
+          <span class="marquee-pill">Sites premium</span>
+          <span class="marquee-pill">Glow roxo gradual</span>
+          <span class="marquee-pill">Direcao visual</span>
+          <span class="marquee-pill">Copy comercial</span>
+          <span class="marquee-pill">Motion elegante</span>
+          <span class="marquee-pill">Landing pages</span>
+          <span class="marquee-pill">Brand presence</span>
+          <span class="marquee-pill">UX responsiva</span>
+        </div>
+      </div>
+
+      <section class="section-shell" id="capabilities">
+        <div class="section-inner">
+          <div class="section-heading animate-on-scroll">
+            <span class="eyebrow">Diferenciais</span>
+            <h2>A Synar combina impacto visual com clareza comercial.</h2>
+            <p>
+              Nao basta o site ser bonito. Ele precisa organizar a mensagem, elevar a percepcao de
+              marca e criar um caminho claro para a pessoa continuar a conversa.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <article class="feature-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 19h14M7 16l5-11 5 11M10 12h4" />
+                </svg>
+              </span>
+              <h3>Presenca imediatamente reconhecivel</h3>
+              <p>
+                A identidade roxa gradual deixa de ser detalhe e vira atmosfera, assinatura e
+                memoria visual desde a abertura da pagina.
+              </p>
+              <div class="badge-row">
+                <span class="badge"><i></i>assinatura visual</span>
+                <span class="badge"><i></i>impacto imediato</span>
+              </div>
+            </article>
+
+            <article class="feature-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 7h16M4 12h16M4 17h10" />
+                </svg>
+              </span>
+              <h3>Conteudo que sustenta valor</h3>
+              <p>
+                Servicos, diferenciais, projetos e processo entram com ritmo e hierarquia para a
+                experiencia continuar sofisticada mesmo nas partes mais comerciais.
+              </p>
+              <div class="badge-row">
+                <span class="badge success"><i></i>clareza</span>
+                <span class="badge"><i></i>secoes estrategicas</span>
+              </div>
+            </article>
+
+            <article class="feature-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4v16M4 12h16M7.5 7.5l9 9M16.5 7.5l-9 9" />
+                </svg>
+              </span>
+              <h3>Conversao sem quebra de clima</h3>
+              <p>
+                CTA, convite e modal aparecem nos pontos certos para captacao e briefing sem
+                interromper o fluxo visual que a marca construiu.
+              </p>
+              <div class="badge-row">
+                <span class="badge warning"><i></i>cta elegante</span>
+                <span class="badge"><i></i>captacao natural</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell" id="services">
+        <div class="section-inner two-col">
+          <article class="service-preview flashlight-card animate-on-scroll">
+            <div class="flashlight-border"></div>
+            <div class="brand-preview">
+              <span class="preview-logo">
+                <img src="../Logo sem fundo.png" alt="Marca Synar aplicada no preview principal" />
+              </span>
+              <div class="preview-copy">
+                <span>synar signature websites</span>
+                <strong>Marca forte na memoria e clara na tomada de decisao.</strong>
+                <p>
+                  A Synar transforma identidade em uma experiencia com contraste, ritmo e
+                  profundidade. O resultado e uma homepage que posiciona, explica e convida para a
+                  proxima etapa.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-copy animate-on-scroll">
+            <span class="eyebrow">Servicos</span>
+            <h3>Sites autorais para marcas que nao querem parecer genericas.</h3>
+            <p>
+              Cada projeto nasce da identidade da marca e vira uma estrutura comercial visualmente
+              forte, com hero marcante, secoes inteligentes, transicoes suaves e CTA bem
+              distribuido ao longo da jornada.
+            </p>
+
+            <div class="code-row">
+              <span class="code-chip"><code>Site institucional</code></span>
+              <span class="code-chip"><code>Landing page premium</code></span>
+              <span class="code-chip"><code>Pagina de servico</code></span>
+              <span class="code-chip"><code>Reposicionamento digital</code></span>
+            </div>
+
+            <div class="metric-grid">
+              <div class="metric-box">
+                <strong>Direcao visual</strong>
+                <p>degrade, brilho e contraste trabalhando como assinatura da marca.</p>
+              </div>
+              <div class="metric-box">
+                <strong>Arquitetura do site</strong>
+                <p>dobras organizadas para apresentar, sustentar valor e converter.</p>
+              </div>
+              <div class="metric-box">
+                <strong>Motion e microefeitos</strong>
+                <p>animacoes leves, recorrentes e integradas ao visual da pagina.</p>
+              </div>
+              <div class="metric-box">
+                <strong>Responsividade premium</strong>
+                <p>leitura forte e atmosfera preservada em telas menores.</p>
+              </div>
+            </div>
+
+            <div class="reference-note">
+              A Synar desenha o site inteiro como vitrine de percepcao. Do topo ao CTA, cada dobra
+              precisa aumentar confianca e fazer a marca parecer mais solida.
+            </div>
+
+            <ul class="contact-list">
+              <li>direcao visual alinhada com a identidade da marca</li>
+              <li>copy pensada para leitura rapida e valor percebido</li>
+              <li>animacoes leves feitas para reforcar, nao distrair</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-shell" id="showcase">
+        <div class="section-inner">
+          <div class="section-heading animate-on-scroll">
+            <span class="eyebrow">Projetos</span>
+            <h2>A mesma assinatura pode se desdobrar em varias frentes sem perder unidade.</h2>
+            <p>
+              A base visual da Synar funciona para institucional, pagina de servico, campanha ou
+              lancamento. O importante e manter a experiencia coesa em qualquer tipo de jornada.
+            </p>
+          </div>
+
+          <div class="portfolio-grid">
+            <article class="portfolio-card animate-on-scroll">
+              <span>Institutional</span>
+              <h3>Homepage que apresenta, posiciona e conduz.</h3>
+              <p>
+                Ideal para marcas que precisam parecer mais maduras, confiaveis e memoraveis logo
+                na primeira visita.
+              </p>
+            </article>
+
+            <article class="portfolio-card animate-on-scroll">
+              <span>Service page</span>
+              <h3>Pagina de servico com valor percebido alto.</h3>
+              <p>
+                Estrutura feita para explicar a oferta, mostrar diferencial e guiar a conversa sem
+                esfriar o visual.
+              </p>
+            </article>
+
+            <article class="portfolio-card animate-on-scroll">
+              <span>Launch campaign</span>
+              <h3>Landing premium para campanha ou lancamento digital.</h3>
+              <p>
+                Foco em impacto inicial, narrativa curta e CTA forte para marcas que precisam
+                concentrar atencao em uma oferta.
+              </p>
+            </article>
+          </div>
+
+          <div class="result-strip">
+            <article class="result-card animate-on-scroll">
+              <strong>Impacto</strong>
+              <span>primeira dobra com foco em marca, contraste e leitura imediata.</span>
+            </article>
+            <article class="result-card animate-on-scroll">
+              <strong>Clareza</strong>
+              <span>mensagem organizada para apresentar valor sem excesso de explicacao.</span>
+            </article>
+            <article class="result-card animate-on-scroll">
+              <strong>Desejo</strong>
+              <span>acabamento visual que faz a pagina parecer mais premium e mais segura.</span>
+            </article>
+            <article class="result-card animate-on-scroll">
+              <strong>Acao</strong>
+              <span>cta e captacao integrados ao fluxo natural da experiencia.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell" id="process">
+        <div class="section-inner">
+          <div class="section-heading animate-on-scroll">
+            <span class="eyebrow">Processo</span>
+            <h2>A Synar trabalha o site como experiencia de marca, nao como pagina solta.</h2>
+            <p>
+              Cada etapa existe para transformar identidade em narrativa digital clara, bonita e
+              convincente. O objetivo e fazer a marca parecer melhor e performar melhor.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-step flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="process-index">01</span>
+              <h3>Ler a marca</h3>
+              <p>Comecamos entendendo a identidade, a oferta e a sensacao que o site precisa passar.</p>
+              <ul>
+                <li>tom visual e comercial</li>
+                <li>referencias e direcao</li>
+                <li>objetivo da homepage</li>
+              </ul>
+            </article>
+
+            <article class="process-step flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="process-index">02</span>
+              <h3>Desenhar a estrutura</h3>
+              <p>Organizamos hero, blocos de valor, servicos, prova e CTA em uma sequencia fluida.</p>
+              <ul>
+                <li>hierarquia clara</li>
+                <li>ritmo entre as dobras</li>
+                <li>narrativa sem excesso</li>
+              </ul>
+            </article>
+
+            <article class="process-step flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="process-index">03</span>
+              <h3>Aplicar a assinatura visual</h3>
+              <p>Glow, profundidade, degrades, contraste e motion entram para reforcar a percepcao.</p>
+              <ul>
+                <li>camadas com profundidade</li>
+                <li>animacoes suaves e recorrentes</li>
+                <li>acabamento consistente</li>
+              </ul>
+            </article>
+
+            <article class="process-step flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="process-index">04</span>
+              <h3>Fechar com contexto</h3>
+              <p>O contato aparece com naturalidade e transforma interesse em proximo passo real.</p>
+              <ul>
+                <li>cta nos pontos certos</li>
+                <li>faq para reduzir atrito</li>
+                <li>entrada natural para briefing</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell" id="proof">
+        <div class="section-inner">
+          <div class="section-heading animate-on-scroll">
+            <span class="eyebrow">Percepcao</span>
+            <h2>O resultado precisa ser sentido em imagem, clareza e decisao.</h2>
+            <p>
+              Quando a experiencia esta bem desenhada, a marca parece mais segura, o conteudo fica
+              facil de consumir e o CTA ganha muito mais forca.
+            </p>
+          </div>
+
+          <div class="quote-grid">
+            <article class="quote-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="quote-mark">"</span>
+              <h3>A marca parece mais segura e melhor posicionada.</h3>
+              <p>O visual nao soa improvisado. Ele comunica cuidado, consistencia e autoridade.</p>
+              <footer>Imagem percebida</footer>
+            </article>
+
+            <article class="quote-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="quote-mark">"</span>
+              <h3>O conteudo fica facil de entender sem perder sofisticao.</h3>
+              <p>Mesmo com brilho e profundidade, a mensagem continua leve, direta e organizada.</p>
+              <footer>Leitura comercial</footer>
+            </article>
+
+            <article class="quote-card flashlight-card animate-on-scroll">
+              <div class="flashlight-border"></div>
+              <span class="quote-mark">"</span>
+              <h3>O CTA entra com vontade real de continuar a conversa.</h3>
+              <p>O fechamento aparece como parte da experiencia, e nao como uma interrupcao seca.</p>
+              <footer>Intencao de conversao</footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell" id="faq">
+        <div class="section-inner faq-grid">
+          <article class="faq-intro flashlight-card animate-on-scroll">
+            <div class="flashlight-border"></div>
+            <span class="eyebrow">FAQ + contato</span>
+            <h3>A Synar pode adaptar essa linguagem ao seu negocio e transformar em site completo.</h3>
+            <p>
+              Se a marca ja tem identidade, usamos isso como base. Se ainda esta evoluindo,
+              desenhamos a presenca digital junto para manter unidade, clareza e impacto.
+            </p>
+
+            <div class="field-stack">
+              <label for="contact-email">Email para briefing</label>
+              <input id="contact-email" type="email" placeholder="nome@empresa.com" />
+              <span class="helper-text">Use este campo como gatilho visual para o futuro formulario da Synar.</span>
+            </div>
+
+            <div class="cta-row">
+              <button class="button-custom" type="button" data-open-modal>
+                <span class="points_wrapper" aria-hidden="true">
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span>
+                </span>
+                <span class="inner">Pedir apresentacao</span>
+              </button>
+            </div>
+
+            <ul class="faq-list">
+              <li>estrutura pronta para paginas internas</li>
+              <li>efeitos visuais com foco em performance</li>
+              <li>assinatura coerente do topo ao rodape</li>
+            </ul>
+          </article>
+
+          <article class="faq-panel flashlight-card animate-on-scroll">
+            <div class="flashlight-border"></div>
+            <details class="faq-item" open>
+              <summary>A Synar faz so a homepage ou o site inteiro?</summary>
+              <p>A estrutura pode comecar pela homepage e evoluir para paginas internas, servicos, campanhas e contato com a mesma linguagem.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Esse visual funciona bem em mobile?</summary>
+              <p>Sim. A hierarquia, os espacamentos e os contrastes foram pensados para manter impacto e legibilidade em telas menores.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Da para adaptar essa linguagem para outros segmentos?</summary>
+              <p>Sim. A base visual e flexivel para produto, servico premium, consultoria, campanha, portfolio ou marca pessoal.</p>
+            </details>
+            <details class="faq-item">
+              <summary>As animacoes pesam a pagina?</summary>
+              <p>Elas foram pensadas com transform e opacity para manter uma experiencia elegante, leve e mais performatica.</p>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-shell" id="cta">
+        <div class="section-inner">
+          <div class="cta-panel animate-on-scroll">
+            <span class="eyebrow">Vamos criar</span>
+            <h3>Sua marca tambem pode ocupar a tela com essa mesma presenca.</h3>
+            <p>
+              Se voce quer um site que pareca premium antes mesmo do primeiro clique, a Synar
+              desenha a estrategia, a atmosfera e o acabamento para isso acontecer com unidade do
+              inicio ao fim.
+            </p>
+            <div class="cta-row">
+              <a class="button-custom" href="#hero">
+                <span class="points_wrapper" aria-hidden="true">
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span><span class="point"></span><span class="point"></span>
+                  <span class="point"></span>
+                </span>
+                <span class="inner">Voltar ao topo</span>
+              </a>
+              <button class="btn-beam-container" type="button" data-open-modal>
+                <span class="beam-border" aria-hidden="true"></span>
+                <span class="btn-beam">Iniciar projeto</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section-inner footer-inner">
+      <span>Synar | sites premium com identidade visual, motion elegante e conversao.</span>
+      <span class="mono">codex/htmlsite.testev2.html</span>
+    </footer>
+  </div>
+
+  <div class="modal-overlay" id="preview-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-top">
+        <button class="modal-close" type="button" data-close-modal aria-label="Fechar modal">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <img src="../Logo sem fundo.png" alt="Logo da Synar em destaque no modal" />
+      </div>
+      <div class="modal-body">
+        <span class="eyebrow">Falar com a Synar</span>
+        <h3 id="modal-title">Conte pra gente qual presenca a sua marca precisa construir.</h3>
+        <p>
+          Este bloco pode virar o ponto de captacao oficial da homepage, abrindo a conversa com
+          contexto visual e deixando o proximo passo claro para o visitante.
+        </p>
+        <div class="modal-list">
+          <span>Direcao visual baseada na identidade da marca.</span>
+          <span>Estrutura comercial com CTA claro e leitura forte.</span>
+          <span>Experiencia responsiva com motion elegante e consistente.</span>
+        </div>
+        <div class="field-stack">
+          <label for="modal-email">Seu melhor email</label>
+          <input id="modal-email" type="email" placeholder="nome@empresa.com" />
+        </div>
+        <div class="cta-row">
+          <button class="button-custom" type="button" data-close-modal>
+            <span class="points_wrapper" aria-hidden="true">
+              <span class="point"></span><span class="point"></span><span class="point"></span>
+              <span class="point"></span><span class="point"></span><span class="point"></span>
+              <span class="point"></span>
+            </span>
+            <span class="inner">Fechar por agora</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function () {
+      const progressBar = document.getElementById("scroll-progress-bar");
+      const modal = document.getElementById("preview-modal");
+      const openButtons = document.querySelectorAll("[data-open-modal]");
+      const closeButtons = document.querySelectorAll("[data-close-modal]");
+      const stackCards = Array.from(document.querySelectorAll("[data-stack-card]"));
+      const heroSection = document.getElementById("hero");
+      const heroCanvas = document.getElementById("hero-canvas");
+      const heroSphere = document.getElementById("hero-sphere");
+
+      function updateScrollProgress() {
+        const scrollTop = window.scrollY || window.pageYOffset;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+        progressBar.style.width = ratio + "%";
+      }
+
+      if (!window.__inViewIO) {
+        window.__inViewIO = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate", "in-view");
+                window.__inViewIO.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -10% 0px" }
+        );
+      }
+
+      window.initInViewAnimations = function (selector) {
+        document.querySelectorAll(selector || ".animate-on-scroll").forEach((el) => {
+          window.__inViewIO.observe(el);
+        });
+      };
+
+      function initFlashlightCards() {
+        document.querySelectorAll(".flashlight-card").forEach((card) => {
+          const setMousePosition = (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width) * 100;
+            const y = ((event.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty("--mouse-x", x + "%");
+            card.style.setProperty("--mouse-y", y + "%");
+          };
+
+          card.addEventListener("pointermove", setMousePosition);
+          card.addEventListener("pointerenter", setMousePosition);
+        });
+      }
+
+      function initHeroGradient() {
+        if (!heroSection) return;
+
+        const prefersReduced =
+          typeof window !== "undefined" &&
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const setPosition = (clientX, clientY) => {
+          const rect = heroSection.getBoundingClientRect();
+          const px = clientX - rect.left - rect.width / 2;
+          const py = clientY - rect.top - rect.height / 2;
+          heroSection.style.setProperty("--hero-pos-x", (px * 0.035).toFixed(2));
+          heroSection.style.setProperty("--hero-pos-y", (py * 0.045).toFixed(2));
+        };
+
+        const reset = () => {
+          heroSection.style.setProperty("--hero-pos-x", "0");
+          heroSection.style.setProperty("--hero-pos-y", "0");
+        };
+
+        if (prefersReduced) {
+          reset();
+          return;
+        }
+
+        heroSection.addEventListener("pointermove", (event) => {
+          setPosition(event.clientX, event.clientY);
+        });
+
+        heroSection.addEventListener(
+          "touchmove",
+          (event) => {
+            if (!event.touches.length) return;
+            setPosition(event.touches[0].clientX, event.touches[0].clientY);
+          },
+          { passive: true }
+        );
+
+        heroSection.addEventListener("pointerleave", reset);
+        heroSection.addEventListener("touchend", reset);
+        heroSection.addEventListener("touchcancel", reset);
+        reset();
+      }
+
+      function initHeroTilt() {
+        if (!heroCanvas || !heroSphere) return;
+
+        const resetTilt = () => {
+          heroSphere.style.setProperty("--tilt-x", 0);
+          heroSphere.style.setProperty("--tilt-y", 0);
+        };
+
+        heroCanvas.addEventListener("pointermove", (event) => {
+          const rect = heroCanvas.getBoundingClientRect();
+          const px = ((event.clientX - rect.left) / rect.width) - 0.5;
+          const py = ((event.clientY - rect.top) / rect.height) - 0.5;
+          heroSphere.style.setProperty("--tilt-x", (px * 10).toFixed(2));
+          heroSphere.style.setProperty("--tilt-y", (py * 10).toFixed(2));
+        });
+
+        heroCanvas.addEventListener("pointerleave", resetTilt);
+        resetTilt();
+      }
+
+      function initStackRotation() {
+        if (!stackCards.length) return;
+        let current = 0;
+
+        setInterval(() => {
+          stackCards[current].classList.remove("is-active");
+          current = (current + 1) % stackCards.length;
+          stackCards[current].classList.add("is-active");
+          const ordered = stackCards.slice(current).concat(stackCards.slice(0, current));
+
+          ordered.forEach((card, index) => {
+            if (index === 0) {
+              card.style.transform = "translate3d(0, 0, 0) rotate(-1.5deg)";
+              card.style.opacity = "1";
+              card.style.zIndex = "3";
+            } else if (index === 1) {
+              card.style.transform = "translate3d(-0.45rem, 1.2rem, -40px) rotate(3deg)";
+              card.style.opacity = "0.85";
+              card.style.zIndex = "2";
+            } else {
+              card.style.transform = "translate3d(-0.85rem, 2.2rem, -80px) rotate(-3deg)";
+              card.style.opacity = "0.65";
+              card.style.zIndex = "1";
+            }
+          });
+        }, 3000);
+      }
+
+      function openModal() {
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      openButtons.forEach((button) => button.addEventListener("click", openModal));
+      closeButtons.forEach((button) => button.addEventListener("click", closeModal));
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        window.initInViewAnimations(".animate-on-scroll");
+        initFlashlightCards();
+        initHeroGradient();
+        initHeroTilt();
+        initStackRotation();
+        updateScrollProgress();
+      });
+
+      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+      window.addEventListener("resize", updateScrollProgress);
+    })();
+  </script>
+
+</body>
+</html>

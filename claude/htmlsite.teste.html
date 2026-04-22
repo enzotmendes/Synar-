@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Synar — Soluções digitais que escalam negócios</title>
+<meta name="description" content="Synar desenvolve aplicativos, automações e soluções digitais funcionais — prontas para escalar do primeiro cliente aos milhares." />
+<meta name="theme-color" content="#06020d" />
+
+<!-- Preload hero assets (critical) -->
+<link rel="preload" as="image" href="../Logo sem fundo.png" fetchpriority="high" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Space Grotesk', 'sans-serif'],
+          sans:    ['Inter', 'sans-serif'],
+          mono:    ['JetBrains Mono', 'monospace'],
+        },
+        colors: {
+          ink:      '#06020d',
+          void:     '#0a0014',
+          obsidian: '#120726',
+          shade:    '#1a0b2e',
+          violet:   '#6d28d9',
+          purple:   '#9333ea',
+          lilac:    '#a855f7',
+          magenta:  '#d946ef',
+          fuchsia:  '#e879f9',
+          rose:     '#ec4899',
+          pearl:    '#f5f0ff',
+          mist:     '#c4b5fd',
+          dim:      '#6b5d86',
+          muted:    '#8b7ba8',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN SYSTEM — SYNAR
+   Aurora violet ID · monogram "S"
+───────────────────────────────────────────────*/
+:root{
+  --c-ink:#06020d; --c-void:#0a0014; --c-obsidian:#120726; --c-shade:#1a0b2e;
+  --c-violet:#6d28d9; --c-purple:#9333ea; --c-lilac:#a855f7;
+  --c-magenta:#d946ef; --c-fuchsia:#e879f9; --c-rose:#ec4899;
+  --c-pearl:#f5f0ff; --c-mist:#c4b5fd; --c-dim:#6b5d86;
+
+  --surface:rgba(255,255,255,0.02);
+  --surface-hi:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --border-hi:rgba(232,121,249,0.35);
+  --text:#ece6f8;
+  --text-muted:#a99bc4;
+  --text-dim:#6b5d86;
+
+  --grad-aurora:linear-gradient(135deg,#6d28d9 0%,#a855f7 30%,#d946ef 55%,#ec4899 80%,#2e0d4e 100%);
+  --grad-soft:linear-gradient(180deg,rgba(168,85,247,0.18) 0%,rgba(236,72,153,0.08) 50%,transparent 100%);
+  --grad-text:linear-gradient(135deg,#f5f0ff 0%,#e879f9 50%,#a855f7 100%);
+  --grad-text-2:linear-gradient(90deg,#c4b5fd 0%,#e879f9 100%);
+  --grad-border:linear-gradient(135deg,rgba(217,70,239,0.6),rgba(168,85,247,0.3),rgba(109,40,217,0.1));
+
+  --ease-smooth:cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out:cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+html,body{ background:var(--c-ink); color:var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; scroll-behavior:smooth; }
+::selection{ background:var(--c-fuchsia); color:#000; }
+
+/* BG LAYERS */
+.grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(to right, rgba(168,85,247,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168,85,247,0.06) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 90%);
+  pointer-events:none;
+}
+/* noise overlay removed — was full-viewport mix-blend composite on every frame */
+.scanlines{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.18) 50%);
+  background-size:100% 4px; opacity:0.18; mix-blend-mode:overlay;
+}
+.blob{ position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none; }
+.blob-1{ width:420px;height:420px;background:radial-gradient(circle,#a855f7 0%,transparent 70%); opacity:.55; animation:blobFloat 18s ease-in-out infinite; }
+.blob-2{ width:500px;height:500px;background:radial-gradient(circle,#d946ef 0%,transparent 70%); opacity:.45; animation:blobFloat 22s ease-in-out infinite reverse; }
+.blob-3{ width:340px;height:340px;background:radial-gradient(circle,#ec4899 0%,transparent 70%); opacity:.38; animation:blobFloat 16s ease-in-out infinite; }
+.blob-4{ width:400px;height:400px;background:radial-gradient(circle,#6d28d9 0%,transparent 70%); opacity:.48; animation:blobFloat 20s ease-in-out infinite reverse; }
+.blob-xs{ width:220px;height:220px;filter:blur(40px); }
+.aurora{
+  position:absolute;inset:-20%;
+  background:conic-gradient(from 90deg at 50% 50%,
+    rgba(109,40,217,0) 0deg,
+    rgba(168,85,247,0.3) 80deg,
+    rgba(217,70,239,0.4) 150deg,
+    rgba(236,72,153,0.25) 220deg,
+    rgba(109,40,217,0.15) 300deg,
+    rgba(109,40,217,0) 360deg);
+  filter:blur(70px); animation:auroraSpin 50s linear infinite; opacity:.45;
+}
+
+/* KEYFRAMES */
+@keyframes blobFloat{ 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-30px) scale(1.05)} 66%{transform:translate(-30px,40px) scale(0.95)} }
+@keyframes auroraSpin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes heroRise{ 0%{opacity:0;transform:translate3d(0,40px,0);filter:blur(12px)} 100%{opacity:1;transform:translate3d(0,0,0);filter:blur(0)} }
+@keyframes gradientShift{ 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+@keyframes pulseGlow{
+  0%,100%{ box-shadow: 0 0 40px rgba(217,70,239,0.35), 0 0 80px rgba(168,85,247,0.15); }
+  50%    { box-shadow: 0 0 60px rgba(217,70,239,0.6),  0 0 120px rgba(168,85,247,0.25); }
+}
+@keyframes scanLine{ 0%{transform:translateX(-100%)} 100%{transform:translateX(300%)} }
+@keyframes spinSlow{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes spinReverse{ from{transform:rotate(360deg)} to{transform:rotate(0)} }
+@keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes flicker{
+  0%,18%,22%,25%,53%,57%,100%{ opacity:1 }
+  20%,24%,55%                { opacity:0.4 }
+}
+@keyframes glowPulse{
+  0%,100%{ filter: drop-shadow(0 0 20px rgba(217,70,239,0.4)); }
+  50%    { filter: drop-shadow(0 0 40px rgba(217,70,239,0.8)); }
+}
+@keyframes pulseRingDot{
+  0%,100%{ box-shadow:0 0 10px var(--c-fuchsia); }
+  50%    { box-shadow:0 0 16px var(--c-fuchsia),0 0 30px var(--c-magenta); }
+}
+
+/* TYPOGRAPHY */
+.font-display{ font-family:'Space Grotesk',sans-serif; }
+.font-mono   { font-family:'JetBrains Mono',monospace; }
+.h-display{ font-family:'Space Grotesk',sans-serif; font-weight:500; letter-spacing:-0.035em; line-height:0.95; }
+.eyebrow{
+  font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.35em;
+  text-transform:uppercase; color:var(--c-mist);
+}
+.grad-text{
+  background:var(--grad-text); background-size:200% 200%;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  animation:gradientShift 8s ease-in-out infinite;
+}
+.grad-text-2{
+  background:var(--grad-text-2);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+/* BUTTONS */
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:.75rem;
+  padding:.95rem 1.75rem;border-radius:999px;
+  font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:.88rem; letter-spacing:.02em;
+  transition:all .4s var(--ease-smooth); overflow:hidden; cursor:pointer; isolation:isolate;
+}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(135deg,#9333ea 0%,#d946ef 50%,#ec4899 100%);
+  background-size:200% 100%;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08) inset,
+    0 10px 40px -10px rgba(217,70,239,0.6),
+    0 0 60px -15px rgba(168,85,247,0.5);
+  animation:pulseGlow 4s ease-in-out infinite;
+}
+.btn-primary::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,0.3) 50%,transparent 80%);
+  background-size:200% 100%; transform:translateX(-120%);
+  transition:transform .9s var(--ease-smooth); z-index:-1;
+}
+.btn-primary:hover{ background-position:100% 0; transform:translateY(-2px); }
+.btn-primary:hover::before{ transform:translateX(120%); }
+
+.btn-ghost{
+  color:var(--text);
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);
+}
+.btn-ghost::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:var(--grad-border);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  opacity:0; transition:opacity .4s ease;
+}
+.btn-ghost:hover{
+  background:rgba(217,70,239,0.06);
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px -10px rgba(217,70,239,0.3);
+}
+.btn-ghost:hover::after{ opacity:1; }
+
+.btn-corner{
+  position:relative;padding:.9rem 1.75rem;border-radius:0;
+  border:1px solid rgba(232,121,249,0.5);
+  background:rgba(217,70,239,0.05); color:var(--c-fuchsia);
+  font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.25em;
+  text-transform:uppercase; transition:all .35s var(--ease-smooth); overflow:hidden;
+}
+.btn-corner::before{
+  content:"";position:absolute;inset:0;
+  background:var(--c-fuchsia); transform:translateY(105%);
+  transition:transform .4s var(--ease-smooth); z-index:0;
+}
+.btn-corner > *{ position:relative; z-index:1; transition:color .35s; }
+.btn-corner:hover{ color:#000; box-shadow:0 0 40px rgba(232,121,249,0.4); }
+.btn-corner:hover::before{ transform:translateY(0); }
+.btn-corner .corner{ position:absolute; width:.55rem; height:.55rem; border-color:var(--c-mist); z-index:2; }
+.btn-corner .corner-tl{ top:0;left:0; border-top:1px solid; border-left:1px solid; }
+.btn-corner .corner-br{ bottom:0;right:0; border-bottom:1px solid; border-right:1px solid; }
+.btn-corner:hover .corner{ border-color:#000; }
+
+/* CARDS */
+.glass-card{
+  position:relative;
+  background:linear-gradient(180deg,rgba(24,12,46,0.55) 0%,rgba(10,0,20,0.45) 100%);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:1.25rem; overflow:hidden;
+  transition:border-color .4s var(--ease-smooth), transform .4s var(--ease-smooth), box-shadow .4s var(--ease-smooth);
+}
+.glass-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%), rgba(217,70,239,0.1), transparent 40%);
+  opacity:0; transition:opacity .5s ease;
+}
+.glass-card:hover{
+  border-color:rgba(232,121,249,0.35);
+  transform:translateY(-6px);
+  box-shadow:0 30px 60px -20px rgba(217,70,239,0.35),0 0 0 1px rgba(232,121,249,0.2) inset;
+}
+.glass-card:hover::before{ opacity:1; }
+
+.card-scan{ position:absolute;top:0;left:0;right:0;height:1px;overflow:hidden;z-index:3;pointer-events:none; }
+.card-scan::after{
+  content:"";display:block;width:33%;height:100%;
+  background:linear-gradient(90deg,transparent,var(--c-fuchsia),transparent);
+  transform:translateX(-100%);
+}
+.glass-card:hover .card-scan::after{ animation:scanLine 2s linear infinite; }
+
+.gradient-border{
+  position:relative;padding:1px;border-radius:1.25rem;
+  background:linear-gradient(135deg,rgba(232,121,249,0.4),rgba(168,85,247,0.15),rgba(109,40,217,0));
+}
+.gradient-border > .inner{
+  background:rgba(10,0,20,0.85);
+  border-radius:calc(1.25rem - 1px);
+}
+
+/* BADGES */
+.badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.35rem .85rem;border-radius:999px;
+  background:rgba(217,70,239,0.12);
+  border:1px solid rgba(232,121,249,0.25);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--c-mist);
+}
+.badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--c-fuchsia);
+  box-shadow:0 0 10px var(--c-fuchsia);
+  animation:pulseRingDot 2s ease-in-out infinite;
+}
+
+/* REVEAL — GSAP animates these, CSS only sets initial state (no-flash) */
+.reveal, .kinetic, .reveal-l, .reveal-r{
+  opacity:0;
+  will-change:transform,opacity;
+}
+.reveal     { transform: translate3d(0, 48px, 0); }
+.kinetic    { transform: translate3d(0, 48px, 0); }
+.reveal-l   { transform: translate3d(-48px, 0, 0); }
+.reveal-r   { transform: translate3d(48px, 0, 0); }
+/* When GSAP isn't available, treat these as always-visible fallback */
+.no-gsap .reveal, .no-gsap .kinetic, .no-gsap .reveal-l, .no-gsap .reveal-r{
+  opacity:1; transform:none;
+}
+
+/* Clip-path wipe reveal (for hero-like panels) */
+.clip-reveal{
+  clip-path: inset(0 0 100% 0);
+  -webkit-clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s var(--ease-smooth), -webkit-clip-path 1.2s var(--ease-smooth);
+  transition-delay:var(--delay,0ms);
+}
+.clip-reveal.in-view{ clip-path: inset(0 0 0 0); -webkit-clip-path: inset(0 0 0 0); }
+
+/* Divider draws from center */
+.divider{ transform:scaleX(0); transform-origin:center; transition:transform 1.1s var(--ease-smooth); }
+.divider.in-view{ transform:scaleX(1); }
+
+/* Heading underline draw */
+.head-underline{ position:relative; display:inline-block; }
+.head-underline::after{
+  content:""; position:absolute; left:0; right:0; bottom:-.35em;
+  height:2px; background:linear-gradient(90deg,var(--c-fuchsia),var(--c-lilac));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 1s var(--ease-smooth) .2s;
+  border-radius:2px;
+  box-shadow:0 0 12px rgba(232,121,249,0.4);
+}
+.head-underline.in-view::after{ transform:scaleX(1); }
+
+/* Counter number styling consistency */
+.counter{ display:inline-block; font-variant-numeric:tabular-nums; }
+
+/* Marquee — pause on hover */
+.marquee:hover .marquee-track{ animation-play-state:paused; }
+.marquee-track{ will-change:transform; }
+
+/* Parallax helpers — `translate` property composes with animated transforms */
+[data-parallax]{
+  translate: 0 var(--py, 0px);
+  will-change: translate;
+}
+
+/* Scroll-linked aurora drift in deeper sections */
+.aurora-drift{
+  position:absolute; inset:-20%;
+  background:conic-gradient(from 120deg at 50% 50%,
+    rgba(109,40,217,0) 0deg,
+    rgba(168,85,247,0.22) 90deg,
+    rgba(217,70,239,0.3) 170deg,
+    rgba(236,72,153,0.2) 240deg,
+    rgba(109,40,217,0) 360deg);
+  filter:blur(110px); opacity:.35;
+  animation:auroraSpin 60s linear infinite reverse;
+  pointer-events:none;
+}
+
+/* LOGO */
+.logo-s{ position:relative;display:inline-flex;align-items:center;justify-content:center; transition:transform .5s var(--ease-smooth); }
+.logo-s svg path{ fill:#fff; transition:filter .3s; }
+.logo-img{
+  display:block;
+  object-fit:contain;
+  filter: brightness(0) invert(1);
+  transition: filter .35s ease;
+}
+.logo-s:hover{ transform:scale(1.05); }
+.logo-s:hover svg{ filter:drop-shadow(0 0 16px rgba(232,121,249,0.7)); }
+.logo-s:hover .logo-img{ filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(232,121,249,0.8)); }
+.logo-ring{
+  position:absolute;inset:-12px;border-radius:50%;
+  border:1px solid rgba(232,121,249,0.2);
+  animation:spinSlow 20s linear infinite;
+}
+.logo-ring::before,.logo-ring::after{
+  content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:var(--c-fuchsia);
+  box-shadow:0 0 10px var(--c-fuchsia);
+}
+.logo-ring::before{ top:-2px;left:50%;transform:translateX(-50%); }
+.logo-ring::after { bottom:-2px;left:50%;transform:translateX(-50%); }
+
+/* NAV */
+.nav-wrap{ position:fixed;top:1.25rem;left:50%;transform:translateX(-50%); z-index:50;width:min(92%,1120px); transition:all .4s ease; }
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem .7rem .7rem 1.1rem;
+  background:rgba(10,0,20,0.55);
+  backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:999px;
+  box-shadow:0 10px 40px -10px rgba(109,40,217,0.3);
+}
+.nav-link{
+  font-family:'Inter',sans-serif;font-weight:400;font-size:.875rem;
+  color:var(--text-muted);padding:.5rem .9rem;border-radius:999px;
+  transition:all .3s ease;
+}
+.nav-link:hover{ color:var(--text);background:rgba(255,255,255,0.04); }
+
+/* MARQUEE */
+.marquee{ overflow:hidden; position:relative; }
+.marquee::before,.marquee::after{ content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none; }
+.marquee::before{ left:0; background:linear-gradient(90deg,var(--c-ink),transparent); }
+.marquee::after { right:0; background:linear-gradient(-90deg,var(--c-ink),transparent); }
+.marquee-track{ display:flex;gap:4rem;width:max-content; animation:marquee 38s linear infinite; }
+
+/* ICON TILES */
+.icon-tile{
+  width:3rem;height:3rem;border-radius:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(217,70,239,0.08));
+  border:1px solid rgba(232,121,249,0.2);
+  color:var(--c-fuchsia);
+  transition:all .5s var(--ease-smooth);
+  position:relative;
+}
+.icon-tile::after{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;
+  background:radial-gradient(circle at 30% 30%,rgba(232,121,249,0.4),transparent 60%);
+  opacity:0;transition:opacity .5s;
+}
+.glass-card:hover .icon-tile{ transform:scale(1.08) rotate(-3deg); border-color:var(--c-fuchsia); }
+.glass-card:hover .icon-tile::after{ opacity:1; }
+
+/* PRICING */
+.price-card{ position:relative; }
+.price-card.featured{
+  background:linear-gradient(180deg,rgba(217,70,239,0.10),rgba(10,0,20,0.6));
+  border-color:rgba(232,121,249,0.4);
+  box-shadow:0 20px 60px -20px rgba(217,70,239,0.4);
+}
+.check{
+  width:1.25rem;height:1.25rem;border-radius:50%;
+  background:linear-gradient(135deg,#d946ef,#9333ea);
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 0 10px rgba(217,70,239,0.4);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:var(--c-ink); }
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#6d28d9,#d946ef);
+  border-radius:10px;border:2px solid var(--c-ink);
+}
+
+/* cursor-glow removed — lerped RAF on radial-gradient every frame was hot */
+
+/* DIVIDER */
+.divider{
+  height:1px;width:100%;
+  background:linear-gradient(90deg,transparent,var(--c-fuchsia),var(--c-lilac),transparent);
+  opacity:.35;position:relative;
+}
+.divider::after{
+  content:"";position:absolute;inset:-1px 0;
+  background:linear-gradient(90deg,transparent,rgba(232,121,249,0.3),transparent);
+  filter:blur(4px);
+}
+
+/* ORBIT */
+.orbit{ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none; }
+.orbit-ring{ position:absolute;border-radius:50%;border:1px dashed rgba(232,121,249,0.18); }
+.orbit-r1{ width:340px;height:340px;animation:spinSlow 50s linear infinite; }
+.orbit-r2{ width:540px;height:540px;animation:spinReverse 70s linear infinite; }
+.orbit-r3{ width:740px;height:740px;border-style:solid;border-color:rgba(168,85,247,0.08);animation:spinSlow 90s linear infinite; }
+.orbit-dot{
+  position:absolute;width:6px;height:6px;border-radius:50%;background:var(--c-fuchsia);
+  box-shadow:0 0 12px var(--c-fuchsia),0 0 24px var(--c-magenta);
+}
+
+/* CLIENT LOGO CARD */
+.client-logo{
+  position:relative;aspect-ratio:5/2;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.06);border-radius:1rem;
+  transition:all .5s var(--ease-smooth);overflow:hidden;
+}
+.client-logo::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 120%,rgba(217,70,239,0.25),transparent 60%);
+  opacity:0;transition:opacity .5s;
+}
+.client-logo:hover{ border-color:rgba(232,121,249,0.4);transform:translateY(-3px); }
+.client-logo:hover::before{ opacity:1; }
+.client-logo .badge-flagship{
+  position:absolute;top:.65rem;right:.65rem;
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--c-fuchsia);background:rgba(217,70,239,0.12);
+  padding:.18rem .5rem;border-radius:999px;border:1px solid rgba(232,121,249,0.3);
+}
+.client-name{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.35rem;
+  letter-spacing:-0.01em;color:#ece6f8;transition:color .4s;
+  position:relative;z-index:1;
+}
+.client-logo:hover .client-name{ color:#fff; }
+
+/* FORM */
+.form-field{
+  width:100%;padding:.95rem 1.1rem;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:.85rem;color:var(--text);
+  font-family:'Inter',sans-serif;font-size:.92rem;
+  transition:all .3s;
+}
+.form-field:focus{
+  outline:none;border-color:var(--c-fuchsia);
+  background:rgba(217,70,239,0.04);
+  box-shadow:0 0 0 3px rgba(217,70,239,0.15);
+}
+.form-field::placeholder{ color:var(--text-dim); }
+
+/* PROCESS */
+.step-num{
+  width:2.8rem;height:2.8rem;border-radius:50%;
+  background:linear-gradient(135deg,rgba(217,70,239,0.2),rgba(109,40,217,0.1));
+  border:1px solid rgba(232,121,249,0.3);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--c-fuchsia);
+  box-shadow:0 0 20px rgba(217,70,239,0.15) inset;
+}
+
+/* Offload work below the fold — browsers skip paint/layout until near viewport */
+section[id]:not(.scroll-expand),
+footer{
+  content-visibility:auto;
+  contain-intrinsic-size: 1px 1200px;
+}
+
+/* GPU-backed animated layers */
+.blob, .aurora, .ethereal-stage, .scroll-expand-media, .scroll-expand-bg{
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Lock wheel/touch during hero pre-expansion — prevents body scroll glitches */
+html.se-locked, html.se-locked body{
+  overscroll-behavior:none;
+  overflow:hidden;
+  touch-action:none;
+}
+
+/* ─────────────────────────────────────────────
+   ZOOM PARALLAX — scroll-driven scale of tech tiles
+───────────────────────────────────────────────*/
+.zoom-parallax{
+  position:relative;
+  height:180vh;
+  background:var(--c-ink);
+}
+.zp-sticky{
+  position:sticky; top:0;
+  height:100vh;
+  overflow:hidden;
+  contain:layout paint;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(109,40,217,0.25), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(236,72,153,0.18), transparent 60%),
+    var(--c-ink);
+}
+.zp-item{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  transform: scale(var(--s, 1));
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.zp-frame{
+  position:relative;
+  width:25vw; height:25vh;
+  overflow:hidden;
+  border-radius:.75rem;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+  background:#0a0014;
+}
+.zp-frame img{
+  width:100%; height:100%;
+  object-fit: cover;
+  display:block;
+}
+/* Force all tech tiles into the Synar purple palette —
+   grayscale the image, then stamp brand hue via mix-blend-mode:color */
+.zp-frame.tinted img{ filter: grayscale(1) brightness(0.9) contrast(1.08); }
+.zp-frame.tinted::after{
+  content:""; position:absolute; inset:0; z-index:2;
+  background: linear-gradient(135deg, #6d28d9 0%, #a855f7 35%, #d946ef 65%, #ec4899 100%);
+  mix-blend-mode: color;
+  pointer-events:none;
+}
+.zp-frame.tinted::before{
+  content:""; position:absolute; inset:0; z-index:3;
+  background: linear-gradient(180deg, rgba(10,0,20,0.1), rgba(10,0,20,0.45));
+  pointer-events:none;
+}
+
+/* Gradual fade-out overlay — smooth transition from zoom to next section */
+.zp-fadeout{
+  position:absolute; inset:0; z-index:20;
+  pointer-events:none;
+  opacity: var(--fade, 0);
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(109,40,217,0.35), transparent 70%),
+    linear-gradient(to bottom, transparent 0%, rgba(6,2,13,0.6) 55%, var(--c-ink) 100%);
+  transition: opacity 80ms linear;
+}
+/* Logo frame (index 0) — CSS aurora backdrop (sharp at any scale) */
+.zp-frame.logo-frame{
+  background:
+    radial-gradient(ellipse 55% 60% at 50% 50%, rgba(217,70,239,0.80), transparent 70%),
+    radial-gradient(ellipse 50% 55% at 20% 25%, rgba(232,121,249,0.5), transparent 65%),
+    radial-gradient(ellipse 55% 55% at 80% 75%, rgba(236,72,153,0.55), transparent 65%),
+    radial-gradient(ellipse 30% 40% at 10% 80%, rgba(12,2,20,0.6), transparent 55%),
+    linear-gradient(135deg, #1a0b2e 0%, #6d28d9 45%, #d946ef 100%);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:
+    0 0 40px -10px rgba(217,70,239,0.55),
+    0 20px 40px -15px rgba(0,0,0,0.6);
+}
+.zp-frame.logo-frame img{
+  width:50%; height:auto;
+  object-fit:contain;
+  filter: brightness(0) invert(1) drop-shadow(0 0 22px rgba(255,255,255,0.5));
+}
+/* Frame position overrides (relative offsets within flex-centered parent) */
+.zp-frame-1{ top:-30vh;  left:5vw;     width:35vw; height:30vh; }
+.zp-frame-2{ top:-10vh;  left:-25vw;   width:20vw; height:45vh; }
+.zp-frame-3{ top:0;      left:27.5vw;  width:25vw; height:25vh; }
+.zp-frame-4{ top:27.5vh; left:5vw;     width:20vw; height:25vh; }
+.zp-frame-5{ top:27.5vh; left:-22.5vw; width:30vw; height:25vh; }
+.zp-frame-6{ top:22.5vh; left:25vw;    width:15vw; height:15vh; }
+
+/* ─────────────────────────────────────────────
+   SCROLL-EXPAND HERO
+───────────────────────────────────────────────*/
+.scroll-expand{
+  position:relative;width:100%;overflow:hidden;
+}
+.scroll-expand-bg{
+  position:absolute;inset:0;z-index:0;
+  transition:opacity 120ms linear;
+  will-change:opacity;
+  /* Pure-CSS aurora — resolution-independent, no upscaling artifacts */
+  background:
+    radial-gradient(ellipse 50% 55% at 18% 25%, rgba(232,121,249,0.55), transparent 65%),
+    radial-gradient(ellipse 60% 60% at 78% 82%, rgba(236,72,153,0.72), transparent 60%),
+    radial-gradient(ellipse 45% 65% at 48% 55%, rgba(217,70,239,0.70), transparent 55%),
+    radial-gradient(ellipse 42% 52% at 65% 15%, rgba(168,85,247,0.55), transparent 60%),
+    radial-gradient(ellipse 38% 48% at 10% 75%, rgba(12,2,20,0.92), transparent 55%),
+    radial-gradient(ellipse 32% 42% at 96% 6%,  rgba(6,2,13,0.85), transparent 55%),
+    linear-gradient(145deg, #1a0b2e 0%, #2e0d4e 40%, #4a148c 72%, #1a0b2e 100%);
+}
+.scroll-expand-bg::before{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(6,2,13,0.55), transparent 60%),
+    linear-gradient(to bottom, rgba(6,2,13,0.25), rgba(6,2,13,0.6));
+  pointer-events:none;
+}
+.scroll-expand-stage{
+  position:relative;z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;min-height:100dvh;
+}
+.scroll-expand-media{
+  position:relative;
+  width:300px;height:400px;
+  border-radius:1.25rem;overflow:hidden;
+  background:rgba(10,0,20,0.55);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 20px 60px -15px rgba(217,70,239,0.4);
+  transform: scale(var(--s, 1));
+  transform-origin: 50% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.scroll-expand-media::after{
+  /* gradient border glow */
+  content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  padding:1px;
+  background:linear-gradient(135deg,rgba(232,121,249,0.5),rgba(168,85,247,0.15),rgba(109,40,217,0.05));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.scroll-expand-media .media-content{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:4% 6%;
+}
+.scroll-expand-media .media-content img{
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 30px rgba(232,121,249,0.85))
+    drop-shadow(0 0 70px rgba(168,85,247,0.55))
+    drop-shadow(0 0 120px rgba(109,40,217,0.35));
+  animation:bob 6s ease-in-out infinite;
+  transition:filter .4s ease;
+}
+.scroll-expand-media-tint{
+  position:absolute;inset:0;z-index:2;
+  background:rgba(10,0,20,0.18);
+  border-radius:inherit;
+  pointer-events:none;
+  transition:opacity .2s linear;
+}
+.scroll-expand-content{
+  position:relative;z-index:10;
+  opacity:0;pointer-events:none;
+  transition:opacity .9s var(--ease-smooth);
+  padding:2rem 1.5rem 6rem;
+  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+}
+.scroll-expand-content.visible{ opacity:1;pointer-events:auto; }
+
+/* ─────────────────────────────────────────────
+   UNICORNSTUDIO AURA (Lumina shader, Synar purple hue)
+───────────────────────────────────────────────*/
+.aura-unicorn{
+  position:absolute; inset:0; z-index:1;
+  width:100%; height:100%;
+  pointer-events:none;
+  filter: hue-rotate(250deg) saturate(1.3) brightness(1.05);
+  mix-blend-mode: screen;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%);
+}
+.aura-unicorn > div,
+.aura-unicorn canvas{ width:100% !important; height:100% !important; }
+
+.hero-landscape,.hero-glow-radial,.hero-grid,.hero-col,.hero-beam{ display:none !important; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+@media (max-width: 768px){
+  .blob-1,.blob-2,.blob-3,.blob-4{ filter:blur(60px); }
+  .nav-wrap{ top:.8rem; }
+}
+</style>
+</head>
+
+<body class="bg-ink text-[var(--text)] antialiased">
+
+<div id="scroll-progress" class="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left"
+     style="background:linear-gradient(90deg,#6d28d9,#d946ef,#ec4899);transform:scaleX(0);transition:transform 120ms linear;"></div>
+
+<!-- NAVBAR -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <a href="#" class="flex items-center gap-2.5 group">
+      <span class="logo-s relative inline-flex">
+        <img src="../Logo sem fundo.png" alt="Synar" width="28" height="28" class="logo-img" />
+      </span>
+      <span class="font-display font-medium tracking-tight text-[1.05rem] text-white">Synar</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-1">
+      <a href="#solucoes" class="nav-link">Soluções</a>
+      <a href="#cases"    class="nav-link">Cases</a>
+      <a href="#processo" class="nav-link">Processo</a>
+      <a href="#planos"   class="nav-link">Planos</a>
+      <a href="#contato"  class="nav-link">Contato</a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="#contato" class="btn btn-primary" style="padding:.55rem 1.15rem;font-size:.82rem">
+        Iniciar projeto
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- SCROLL-EXPAND HERO -->
+<section class="scroll-expand" id="scrollExpand">
+  <!-- Fading background (CSS aurora, resolution-independent) -->
+  <div class="scroll-expand-bg" id="scrollExpandBg"></div>
+
+  <!-- UnicornStudio aura (Lumina shader, purple via hue-rotate) -->
+  <div class="aura-unicorn" id="auraUnicorn" aria-hidden="true">
+    <div data-us-project="ILgOO23w4wEyPQOKyLO4"
+         data-us-scale="0.6"
+         data-us-dpi="1.25"
+         data-us-fps="30"
+         data-us-production="true"
+         data-us-lazyload="true"
+         data-us-disable-mobile="true"></div>
+    <script>
+      !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head||document.body).appendChild(i)}}();
+    </script>
+  </div>
+
+  <!-- 100dvh stage with expanding media frame -->
+  <div class="scroll-expand-stage">
+    <div class="scroll-expand-media" id="scrollExpandMedia">
+      <div class="media-content">
+        <img src="../Logo sem fundo.png" alt="Synar" fetchpriority="high" decoding="async" />
+      </div>
+      <div class="scroll-expand-media-tint" id="scrollExpandMediaTint"></div>
+    </div>
+  </div>
+
+  <!-- Content revealed after full expansion -->
+  <div class="scroll-expand-content" id="scrollExpandContent">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#contato" class="btn btn-primary">
+        Iniciar meu projeto
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+      <span class="eyebrow">Stack</span>
+      <span class="font-mono text-xs text-[var(--c-mist)]">[ APPS ]</span>
+      <span class="font-mono text-xs text-[var(--c-mist)]">[ AUTOMAÇÕES ]</span>
+      <span class="font-mono text-xs text-[var(--c-mist)]">[ INTEGRAÇÕES ]</span>
+      <span class="font-mono text-xs text-[var(--c-mist)]">[ IA ]</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS MARQUEE -->
+<section class="relative py-16 border-y border-white/5">
+  <div class="text-center mb-10 reveal">
+    <span class="eyebrow">Clientes que já confiaram na Synar</span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="flex items-center gap-16 text-[var(--text-dim)] text-2xl font-display font-semibold tracking-tight opacity-70">
+        <span>✦ Saint Germain</span>
+        <span>◆ Elevate Ecom</span>
+        <span>▲ Adscale</span>
+        <span>◐ MG Assessoria</span>
+        <span>✦ Saint Germain</span>
+        <span>◆ Elevate Ecom</span>
+        <span>▲ Adscale</span>
+        <span>◐ MG Assessoria</span>
+      </div>
+      <div class="flex items-center gap-16 text-[var(--text-dim)] text-2xl font-display font-semibold tracking-tight opacity-70">
+        <span>✦ Saint Germain</span>
+        <span>◆ Elevate Ecom</span>
+        <span>▲ Adscale</span>
+        <span>◐ MG Assessoria</span>
+        <span>✦ Saint Germain</span>
+        <span>◆ Elevate Ecom</span>
+        <span>▲ Adscale</span>
+        <span>◐ MG Assessoria</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÕES -->
+<section id="solucoes" class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-2 blob-xs" style="top:10%;left:-5%;"></div>
+    <div class="blob blob-3 blob-xs" style="bottom:5%;right:-5%;"></div>
+  </div>
+  <div class="grid-overlay"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl mb-16 kinetic">
+      <h2 class="h-display text-4xl md:text-6xl text-white mt-4 head-underline">
+        O que a Synar <span class="grad-text-2">entrega pra você.</span>
+      </h2>
+      <p class="mt-6 text-[var(--text-muted)] text-lg leading-relaxed">
+        Seis frentes de desenvolvimento, uma única equipe. Do protótipo à operação em escala —
+        sem terceirizações invisíveis.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="glass-card p-7 reveal">
+        <div class="card-scan"></div>
+        <div class="icon-tile mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3 class="font-display text-xl text-white tracking-tight">Aplicativos Mobile & Web</h3>
+        <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Apps nativos e PWA com arquitetura pronta para escalar. iOS, Android, web — mesma base, entrega contínua.
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+          <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+        </div>
+      </div>
+
+      <div class="glass-card gradient-border p-[1px] reveal" style="--delay:80ms">
+        <div class="inner p-7 rounded-[inherit] h-full">
+          <div class="card-scan"></div>
+          <div class="icon-tile mb-6">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="font-display text-xl text-white tracking-tight">Automações Funcionais</h3>
+          <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+            Fluxos que rodam sozinhos: WhatsApp, CRM, e-mail, planilhas e APIs conversando em segundo plano.
+          </p>
+          <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+            <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-7 reveal" style="--delay:160ms">
+        <div class="card-scan"></div>
+        <div class="icon-tile mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 class="font-display text-xl text-white tracking-tight">Sites & Landing Pages</h3>
+        <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Institucionais e páginas de conversão com performance, SEO e design que vende antes do time comercial.
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+          <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-7 reveal" style="--delay:240ms">
+        <div class="card-scan"></div>
+        <div class="icon-tile mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3 class="font-display text-xl text-white tracking-tight">Integrações & APIs</h3>
+        <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Liga tudo que a sua operação usa: ERP, gateway, marketplace, BI. Dados fluindo sem planilha no meio do caminho.
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+          <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-7 reveal" style="--delay:320ms">
+        <div class="card-scan"></div>
+        <div class="icon-tile mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="font-display text-xl text-white tracking-tight">IA & Chatbots</h3>
+        <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Agentes de atendimento, qualificação e suporte ligados direto ao seu WhatsApp, site e base de conhecimento.
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+          <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-7 reveal" style="--delay:400ms">
+        <div class="card-scan"></div>
+        <div class="icon-tile mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <h3 class="font-display text-xl text-white tracking-tight">Dashboards & BI</h3>
+        <p class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Painéis vivos, com métricas que importam, atualizando em tempo real. Decida olhando dado, não achismo.
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+          <span class="font-mono text-[0.68rem] tracking-[0.2em] text-[var(--c-fuchsia)] uppercase">SABER MAIS →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK · ZOOM PARALLAX INTRO -->
+<section class="relative py-24 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-4" style="top:20%;left:-8%;opacity:.3"></div>
+  </div>
+  <div class="relative max-w-3xl mx-auto px-6 text-center kinetic">
+    <span class="eyebrow">Stack · Tecnologia</span>
+    <h2 class="h-display text-4xl md:text-5xl text-white mt-4">
+      Um núcleo. <span class="grad-text">Infinitas superfícies.</span>
+    </h2>
+    <p class="mt-5 text-[var(--text-muted)] text-lg">
+      Role para mergulhar no universo que a Synar constrói.
+    </p>
+  </div>
+</section>
+
+<!-- ZOOM PARALLAX -->
+<section class="zoom-parallax" aria-label="Universo tecnológico Synar">
+  <div class="zp-sticky">
+    <div class="zp-item">
+      <div class="zp-frame logo-frame">
+        <img src="../Logo sem fundo.png" alt="Synar" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-1 tinted">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-2 tinted">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-3 tinted">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-4 tinted">
+        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-5 tinted">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="zp-item">
+      <div class="zp-frame zp-frame-6 tinted">
+        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=70" alt="" loading="lazy" decoding="async" />
+      </div>
+    </div>
+
+    <!-- Gradual fade to next section -->
+    <div class="zp-fadeout" id="zpFadeout" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- CASE: SAINT GERMAIN -->
+<section id="cases" class="relative py-32 overflow-hidden" hidden style="display:none">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-1" style="top:30%;left:-20%;opacity:.4;"></div>
+    <div class="blob blob-3" style="top:10%;right:-15%;opacity:.35;"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="kinetic">
+      <div class="flex items-center gap-3 mb-4 flex-wrap">
+        <span class="eyebrow">02 / Case principal</span>
+        <span class="badge"><span class="dot"></span>Carro chefe</span>
+      </div>
+      <h2 class="h-display text-4xl md:text-5xl text-white mt-2">
+        Saint Germain: <span class="grad-text">a operação que virou sistema.</span>
+      </h2>
+      <p class="mt-6 text-[var(--text-muted)] leading-relaxed">
+        Nosso cliente âncora. Transformamos processos espalhados em um ecossistema digital coeso
+        — aplicativo, automações e dashboards rodando como uma só máquina.
+      </p>
+
+      <ul class="mt-8 space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong class="text-white">App sob medida</strong> — experiência dedicada para a operação e para o cliente final.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong class="text-white">Automações 24/7</strong> — tarefas repetitivas saíram da mão do time.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong class="text-white">Dashboards em tempo real</strong> — decisões com dado na tela, não em reunião.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span><strong class="text-white">Parceria contínua</strong> — não é entrega pontual, é evolução mensal.</span>
+        </li>
+      </ul>
+
+      <div class="mt-10 flex items-center gap-4">
+        <a href="#contato" class="btn-corner">
+          <span class="corner corner-tl"></span>
+          <span class="corner corner-br"></span>
+          <span>Quero um caso assim</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="relative reveal clip-reveal" style="--delay:150ms">
+      <div class="glass-card p-6 md:p-8 relative">
+        <div class="flex items-center gap-2 mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]/60"></span>
+          <span class="ml-auto font-mono text-[0.65rem] tracking-[0.2em] text-[var(--text-dim)] uppercase">saint.germain · live</span>
+        </div>
+
+        <svg viewBox="0 0 400 220" class="w-full h-auto">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" x2="1">
+              <stop offset="0%"  stop-color="#a855f7"/>
+              <stop offset="50%" stop-color="#d946ef"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+            <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%"   stop-color="#d946ef" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#d946ef" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+            <line x1="0"  y1="40"  x2="400" y2="40"/>
+            <line x1="0"  y1="90"  x2="400" y2="90"/>
+            <line x1="0"  y1="140" x2="400" y2="140"/>
+            <line x1="0"  y1="190" x2="400" y2="190"/>
+          </g>
+          <path d="M0 180 L40 160 L80 170 L120 140 L160 150 L200 110 L240 120 L280 80 L320 95 L360 50 L400 60 L400 220 L0 220 Z"
+                fill="url(#areaGrad)"/>
+          <path id="chartLine"
+                d="M0 180 L40 160 L80 170 L120 140 L160 150 L200 110 L240 120 L280 80 L320 95 L360 50 L400 60"
+                fill="none" stroke="url(#lineGrad)" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round"
+                stroke-dasharray="900" stroke-dashoffset="900"/>
+          <circle cx="400" cy="60" r="5" fill="#fff">
+            <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="400" cy="60" r="14" fill="#d946ef" fill-opacity="0.3">
+            <animate attributeName="r" values="10;22;10" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="fill-opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+
+        <div class="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/5">
+          <div>
+            <div class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[var(--text-dim)]">Processos</div>
+            <div class="font-display text-2xl text-white mt-1"><span class="counter" data-count="40" data-prefix="+">+40</span></div>
+          </div>
+          <div>
+            <div class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[var(--text-dim)]">Tempo salvo</div>
+            <div class="font-display text-2xl text-white mt-1"><span class="counter" data-count="120">120</span><span class="text-sm text-[var(--c-fuchsia)]">h/mês</span></div>
+          </div>
+          <div>
+            <div class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[var(--text-dim)]">Uptime</div>
+            <div class="font-display text-2xl text-white mt-1"><span class="counter" data-count="99.9" data-decimals="1">99.9</span><span class="text-sm text-[var(--c-fuchsia)]">%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute -top-4 -right-4 md:-right-8 glass-card px-4 py-3 flex items-center gap-3 shadow-2xl"
+           style="animation:bob 5s ease-in-out infinite">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--c-lilac)] to-[var(--c-fuchsia)] flex items-center justify-center shadow-[0_0_20px_rgba(232,121,249,0.5)]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <div class="text-xs text-[var(--text-muted)]">Fluxo automatizado</div>
+          <div class="text-[0.65rem] font-mono text-[var(--text-dim)]">online · 24/7</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="relative py-24 overflow-hidden" hidden style="display:none">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="aurora-drift" data-parallax="0.12"></div>
+  </div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
+      <div class="reveal text-center md:text-left">
+        <div class="h-display text-5xl md:text-6xl">
+          <span class="grad-text counter" data-count="20" data-prefix="+">+20</span>
+        </div>
+        <div class="eyebrow mt-2">projetos entregues</div>
+      </div>
+      <div class="reveal text-center md:text-left" style="--delay:100ms">
+        <div class="h-display text-5xl md:text-6xl">
+          <span class="grad-text counter" data-count="4">4</span>
+        </div>
+        <div class="eyebrow mt-2">clientes ativos</div>
+      </div>
+      <div class="reveal text-center md:text-left" style="--delay:200ms">
+        <div class="h-display text-5xl md:text-6xl">
+          <span class="grad-text counter" data-count="120">120</span><span class="grad-text text-2xl align-super">h</span>
+        </div>
+        <div class="eyebrow mt-2">salvas / mês</div>
+      </div>
+      <div class="reveal text-center md:text-left" style="--delay:300ms">
+        <div class="h-display text-5xl md:text-6xl">
+          <span class="grad-text counter" data-count="99.9" data-decimals="1">99.9</span><span class="grad-text text-2xl align-super">%</span>
+        </div>
+        <div class="eyebrow mt-2">uptime médio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLIENTES GRID -->
+<section class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-2" style="top:20%;right:-10%;opacity:.35"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 kinetic">
+      <h2 class="h-display text-4xl md:text-5xl text-white mt-4">
+        Marcas que <span class="grad-text-2">já crescem com a Synar.</span>
+      </h2>
+      <p class="mt-5 text-[var(--text-muted)]">Quatro histórias, um padrão: entrega pronta para escalar.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <a href="#contato" class="client-logo reveal">
+        <span class="client-name">Saint Germain</span>
+      </a>
+
+      <a href="#contato" class="client-logo reveal" style="--delay:80ms">
+        <span class="client-name">Elevate Ecom</span>
+      </a>
+
+      <a href="#contato" class="client-logo reveal" style="--delay:160ms">
+        <span class="client-name">Adscale</span>
+      </a>
+
+      <a href="#contato" class="client-logo reveal" style="--delay:240ms">
+        <span class="client-name">MG Assessoria</span>
+      </a>
+
+    </div>
+
+    <div class="text-center mt-12 reveal" style="--delay:400ms">
+      <p class="text-[var(--text-muted)] text-sm">
+        Seu nome pode ser o próximo aqui. <a href="#contato" class="text-[var(--c-fuchsia)] hover:text-white transition-colors underline decoration-dotted underline-offset-4">Vamos conversar →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo" class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-4" style="top:10%;left:-8%;opacity:.3"></div>
+    <div class="blob blob-3" style="bottom:5%;right:-8%;opacity:.3"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-20 kinetic">
+      <h2 class="h-display text-4xl md:text-5xl text-white mt-4">
+        Como a Synar <span class="grad-text">trabalha.</span>
+      </h2>
+      <p class="mt-5 text-[var(--text-muted)]">Sem ritual corporativo. Sem surpresa na fatura.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="reveal">
+        <div class="step-num mb-5">01</div>
+        <h3 class="font-display text-xl text-white tracking-tight">Diagnóstico</h3>
+        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+          Reunião de 45 minutos. A gente entende o gargalo, o objetivo e os dados que já existem.
+        </p>
+      </div>
+      <div class="reveal" style="--delay:100ms">
+        <div class="step-num mb-5">02</div>
+        <h3 class="font-display text-xl text-white tracking-tight">Escopo & Proposta</h3>
+        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+          Em até 72h, documento com entregas, prazo e investimento — sem camadas escondidas.
+        </p>
+      </div>
+      <div class="reveal" style="--delay:200ms">
+        <div class="step-num mb-5">03</div>
+        <h3 class="font-display text-xl text-white tracking-tight">Construção</h3>
+        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+          Sprints semanais com demos. Você vê a solução nascer, aprova e ajusta ao vivo.
+        </p>
+      </div>
+      <div class="reveal" style="--delay:300ms">
+        <div class="step-num mb-5">04</div>
+        <h3 class="font-display text-xl text-white tracking-tight">Escala & Suporte</h3>
+        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+          Entregue, monitorado e evoluindo. Suporte contínuo opcional para nunca mais parar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="relative py-28 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-4" style="top:-10%;left:-10%;opacity:.35"></div>
+    <div class="blob blob-1" style="bottom:-10%;right:-10%;opacity:.3"></div>
+  </div>
+
+  <div class="relative max-w-3xl mx-auto px-6 text-center">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#qgrad)" stroke-width="1.5" class="mx-auto opacity-80">
+      <defs><linearGradient id="qgrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+      <path d="M3 21c0-4 2-8 6-10M12 21c0-4 2-8 6-10"/>
+    </svg>
+
+    <blockquote class="mt-6 font-display text-2xl md:text-3xl text-white leading-snug kinetic">
+      "A Synar entrou e transformou a forma como a gente opera. O que era planilha, grupo de WhatsApp
+      e reunião virou <span class="grad-text">sistema</span> — e o time ganhou tempo pra crescer de verdade."
+    </blockquote>
+
+    <div class="mt-8 flex items-center justify-center gap-3 reveal" style="--delay:300ms">
+      <div class="w-11 h-11 rounded-full bg-gradient-to-br from-[var(--c-lilac)] to-[var(--c-rose)] flex items-center justify-center font-display text-white font-semibold shadow-[0_0_20px_rgba(232,121,249,0.4)]">S</div>
+      <div class="text-left">
+        <div class="text-[var(--text-dim)] text-xs font-mono">Cliente âncora · desde o começo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLANOS -->
+<section id="planos" class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-3" style="top:10%;left:-8%;opacity:.3"></div>
+    <div class="blob blob-2" style="bottom:5%;right:-8%;opacity:.3"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 kinetic">
+      <h2 class="h-display text-4xl md:text-5xl text-white mt-4">
+        Escolha o <span class="grad-text-2">modelo que cabe.</span>
+      </h2>
+      <p class="mt-5 text-[var(--text-muted)]">Projetos pontuais ou parceria contínua — você decide o formato.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Launch -->
+      <div class="glass-card p-8 price-card reveal">
+        <div class="eyebrow">Launch</div>
+        <div class="mt-4">
+          <span class="h-display text-3xl text-white">Projeto único</span>
+        </div>
+        <p class="mt-2 text-sm text-[var(--text-muted)]">Entrega fechada. Escopo claro, prazo definido.</p>
+        <a href="#contato" class="btn btn-ghost mt-6 w-full justify-center">Solicitar orçamento</a>
+        <ul class="mt-8 space-y-3 text-sm text-[var(--text-muted)]">
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Landing ou site institucional</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Automação pontual</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Entrega em 2 a 4 semanas</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> 30 dias de garantia</li>
+        </ul>
+      </div>
+
+      <!-- Scale (featured) -->
+      <div class="glass-card p-8 price-card featured reveal" style="--delay:100ms">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div class="eyebrow">Scale</div>
+        </div>
+        <div class="mt-4">
+          <span class="h-display text-3xl grad-text">Parceria mensal</span>
+        </div>
+        <p class="mt-2 text-sm text-[var(--text-muted)]">Time dedicado, roadmap vivo, entregas contínuas.</p>
+        <a href="#contato" class="btn btn-primary mt-6 w-full justify-center">Quero conversar</a>
+        <ul class="mt-8 space-y-3 text-sm text-[var(--text-muted)]">
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Apps, automações e integrações</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Sprints semanais</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Canal direto com o time</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Suporte prioritário</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Evolução mensal contínua</li>
+        </ul>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="glass-card p-8 price-card reveal" style="--delay:200ms">
+        <div class="eyebrow">Enterprise</div>
+        <div class="mt-4">
+          <span class="h-display text-3xl text-white">Sob medida</span>
+        </div>
+        <p class="mt-2 text-sm text-[var(--text-muted)]">Operações complexas e multi-sistema.</p>
+        <a href="#contato" class="btn btn-ghost mt-6 w-full justify-center">Falar com fundador</a>
+        <ul class="mt-8 space-y-3 text-sm text-[var(--text-muted)]">
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Escopo dedicado</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Squad exclusiva</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> SLA customizado</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> NDA e compliance</li>
+          <li class="flex gap-3"><span class="check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Onboarding guiado</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-center text-[var(--text-dim)] text-sm mt-10 reveal">
+      Os valores variam por escopo. <a href="#contato" class="text-[var(--c-fuchsia)] hover:text-white transition-colors">Peça uma proposta sob medida →</a>
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="blob blob-1 blob-xs" style="top:20%;right:5%;opacity:.35"></div>
+  </div>
+  <div class="relative max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12 kinetic">
+      <h2 class="h-display text-4xl md:text-5xl text-white mt-4">
+        Perguntas <span class="grad-text-2">honestas.</span>
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="group glass-card px-6 py-5 reveal" open>
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <span class="font-display text-lg text-white">Quanto tempo leva um projeto?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--c-fuchsia)] transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <p class="mt-4 text-[var(--text-muted)] text-sm leading-relaxed">
+          Projetos pontuais (Launch) saem em 2 a 4 semanas. Parcerias mensais (Scale) entregam em sprints semanais,
+          com a primeira feature no ar já na segunda semana.
+        </p>
+      </details>
+      <details class="group glass-card px-6 py-5 reveal" style="--delay:80ms">
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <span class="font-display text-lg text-white">Vocês trabalham com que tecnologias?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--c-fuchsia)] transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <p class="mt-4 text-[var(--text-muted)] text-sm leading-relaxed">
+          Next.js, React Native, Node, Python, n8n, Make, Supabase, Postgres, OpenAI e as APIs dos sistemas que
+          você já usa (WhatsApp, ERPs, gateways, marketplaces).
+        </p>
+      </details>
+      <details class="group glass-card px-6 py-5 reveal" style="--delay:160ms">
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <span class="font-display text-lg text-white">E se eu ainda não sei o que preciso?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--c-fuchsia)] transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <p class="mt-4 text-[var(--text-muted)] text-sm leading-relaxed">
+          Normal — a reunião de diagnóstico existe pra isso. Em 45 minutos a gente mapeia o gargalo e já sai com
+          três caminhos possíveis, do mais barato ao mais completo.
+        </p>
+      </details>
+      <details class="group glass-card px-6 py-5 reveal" style="--delay:240ms">
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <span class="font-display text-lg text-white">O código fica comigo?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--c-fuchsia)] transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <p class="mt-4 text-[var(--text-muted)] text-sm leading-relaxed">
+          Sempre. Código, credenciais e infra no seu nome. Entregamos documentado, pronto para qualquer time continuar.
+        </p>
+      </details>
+      <details class="group glass-card px-6 py-5 reveal" style="--delay:320ms">
+        <summary class="flex items-center justify-between cursor-pointer list-none">
+          <span class="font-display text-lg text-white">Vocês assinam NDA?</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--c-fuchsia)] transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <p class="mt-4 text-[var(--text-muted)] text-sm leading-relaxed">
+          Sim, antes mesmo da primeira conversa detalhada. Seu projeto é seu.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="relative py-32 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="aurora" style="opacity:.55"></div>
+    <div class="blob blob-2" style="top:-10%;left:20%;"></div>
+    <div class="blob blob-3" style="bottom:-10%;right:10%;"></div>
+  </div>
+  <div class="grid-overlay"></div>
+
+  <div class="relative max-w-5xl mx-auto px-6">
+    <div class="text-center mb-14">
+      <div class="logo-s relative inline-flex mb-6">
+        <span class="logo-ring"></span>
+        <img src="../Logo sem fundo.png" alt="Synar" width="64" height="64" style="animation:glowPulse 4s ease-in-out infinite; filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(232,121,249,0.5));" />
+      </div>
+
+      <h2 class="h-display text-4xl md:text-6xl text-white kinetic">
+        Vamos <span class="grad-text">construir juntos.</span>
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-8">
+
+      <form class="lg:col-span-3 glass-card p-6 md:p-8 reveal" onsubmit="event.preventDefault(); alert('Obrigado! Retornamos em até 24h úteis.');">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="eyebrow block mb-2" for="f-name">Nome</label>
+            <input id="f-name" type="text" class="form-field" placeholder="Seu nome" required>
+          </div>
+          <div>
+            <label class="eyebrow block mb-2" for="f-email">E-mail</label>
+            <input id="f-email" type="email" class="form-field" placeholder="voce@empresa.com" required>
+          </div>
+          <div>
+            <label class="eyebrow block mb-2" for="f-company">Empresa</label>
+            <input id="f-company" type="text" class="form-field" placeholder="Nome da empresa">
+          </div>
+          <div>
+            <label class="eyebrow block mb-2" for="f-phone">WhatsApp</label>
+            <input id="f-phone" type="tel" class="form-field" placeholder="(11) 9 0000-0000">
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="eyebrow block mb-2" for="f-msg">Conte sobre o projeto</label>
+          <textarea id="f-msg" rows="5" class="form-field" placeholder="O que você quer construir? Qual o gargalo hoje?"></textarea>
+        </div>
+        <div class="mt-6 flex flex-col sm:flex-row items-center gap-4">
+          <button type="submit" class="btn btn-primary w-full sm:w-auto">
+            Enviar mensagem
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <span class="text-xs text-[var(--text-dim)]">Respondemos em até 24h úteis.</span>
+        </div>
+      </form>
+
+      <div class="lg:col-span-2 space-y-4 reveal" style="--delay:200ms">
+
+        <a href="https://wa.me/5547999931583" target="_blank" rel="noopener" class="glass-card p-6 flex items-start gap-4 block">
+          <div class="icon-tile">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.7 2.6 4.2 3.6 2.5 1 2.5.7 3 .6.5 0 1.6-.6 1.8-1.3.2-.7.2-1.2.2-1.3-.1-.1-.2-.2-.5-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="eyebrow text-[var(--c-fuchsia)]">WhatsApp</div>
+            <div class="mt-1 text-white font-display text-lg">(47) 99993-1583</div>
+            <div class="mt-1 text-xs text-[var(--text-dim)] font-mono">Resposta em minutos</div>
+          </div>
+        </a>
+
+        <a href="https://instagram.com/synarexperience" target="_blank" rel="noopener" class="glass-card p-6 flex items-start gap-4 block">
+          <div class="icon-tile">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+          </div>
+          <div>
+            <div class="eyebrow text-[var(--c-fuchsia)]">Instagram</div>
+            <div class="mt-1 text-white font-display text-lg">@synarexperience</div>
+            <div class="mt-1 text-xs text-[var(--text-dim)] font-mono">Bastidores e novidades</div>
+          </div>
+        </a>
+
+        <a href="#" class="glass-card p-6 flex items-start gap-4 block">
+          <div class="icon-tile">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <div class="eyebrow text-[var(--c-fuchsia)]">Agendar diagnóstico</div>
+            <div class="mt-1 text-white font-display text-lg">45 minutos, gratuito</div>
+            <div class="mt-1 text-xs text-[var(--text-dim)] font-mono">Sem compromisso</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-white/5 bg-[var(--c-void)]">
+  <div class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-5 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2.5 mb-4">
+        <span class="logo-s relative inline-flex">
+          <img src="../Logo sem fundo.png" alt="Synar" width="24" height="24" class="logo-img" />
+        </span>
+        <span class="font-display font-medium text-white">Synar</span>
+      </div>
+      <p class="text-sm text-[var(--text-muted)] max-w-xs leading-relaxed">
+        Aplicativos, automações e soluções digitais sob medida — prontos para escalar negócios.
+      </p>
+      <div class="mt-6 flex items-center gap-3">
+        <a href="https://instagram.com/synarexperience" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[var(--text-muted)] hover:text-white hover:border-[var(--c-fuchsia)] transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.22.06 1.27.07 1.65.07 4.86s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.59-.01-4.86-.07c-1.16-.05-1.8-.25-2.22-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.43-.37-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.59.07-4.86c.04-1.16.24-1.8.41-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.22-.41C8.41 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38A5.85 5.85 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38c.66-.66 1.08-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.85 5.85 0 0 0-1.38-2.12A5.85 5.85 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.84a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+        </a>
+        <a href="https://wa.me/5547999931583" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[var(--text-muted)] hover:text-white hover:border-[var(--c-fuchsia)] transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.7 2.6 4.2 3.6 2.5 1 2.5.7 3 .6.5 0 1.6-.6 1.8-1.3.2-.7.2-1.2.2-1.3-.1-.1-.2-.2-.5-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="eyebrow mb-4">Serviços</div>
+      <ul class="space-y-2.5 text-sm text-[var(--text-muted)]">
+        <li><a href="#solucoes" class="hover:text-white transition-colors">Aplicativos</a></li>
+        <li><a href="#solucoes" class="hover:text-white transition-colors">Automações</a></li>
+        <li><a href="#solucoes" class="hover:text-white transition-colors">Sites & LPs</a></li>
+        <li><a href="#solucoes" class="hover:text-white transition-colors">Integrações</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow mb-4">Empresa</div>
+      <ul class="space-y-2.5 text-sm text-[var(--text-muted)]">
+        <li><a href="#cases" class="hover:text-white transition-colors">Cases</a></li>
+        <li><a href="#processo" class="hover:text-white transition-colors">Processo</a></li>
+        <li><a href="#planos" class="hover:text-white transition-colors">Planos</a></li>
+        <li><a href="#contato" class="hover:text-white transition-colors">Contato</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow mb-4">Contato</div>
+      <ul class="space-y-2.5 text-sm text-[var(--text-muted)]">
+        <li><a href="https://wa.me/5547999931583" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp</a></li>
+        <li><a href="https://instagram.com/synarexperience" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="font-mono text-xs text-[var(--text-dim)]">© 2026 Synar · Todos os direitos reservados</div>
+      <div class="font-mono text-[0.65rem] tracking-[0.3em] text-[var(--text-dim)] uppercase flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--c-fuchsia)]" style="box-shadow:0 0 10px var(--c-fuchsia);animation:flicker 2.5s infinite"></span>
+        SYS.ONLINE
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const progress = document.getElementById('scroll-progress');
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    progress.style.transform = `scaleX(${pct})`;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* cursor-glow removed */
+
+  /* IO kept ONLY for CSS-based effects that don't use GSAP (divider, head-underline, clip-reveal) */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.divider, .head-underline, .clip-reveal').forEach(el => io.observe(el));
+
+  /* Pause the UnicornStudio shader when hero is out of viewport (huge GPU savings) */
+  const auraEl = document.getElementById('auraUnicorn');
+  const heroEl = document.getElementById('scrollExpand');
+  if (auraEl && heroEl) {
+    const auraIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        /* visibility:hidden keeps the canvas alive (no re-init) but browsers skip WebGL frames */
+        auraEl.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
+      });
+    }, { rootMargin: '100px 0px 100px 0px' });
+    auraIO.observe(heroEl);
+
+    /* Also pause when tab is hidden */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) auraEl.style.visibility = 'hidden';
+    });
+  }
+
+  /* GSAP scroll reveal — spec: y:48 → y:0, opacity 0 → 1, 0.9s, power3.out */
+  const revealTargets = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .kinetic');
+
+  const forceReveal = () => {
+    revealTargets.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  };
+
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    revealTargets.forEach(el => {
+      const rawDelay = getComputedStyle(el).getPropertyValue('--delay').trim();
+      /* Cut stagger delay in half so cascades don't feel slow during fast scroll */
+      const delaySec = rawDelay ? (parseFloat(rawDelay) / 1000) * 0.5 : 0;
+
+      const isLeft  = el.classList.contains('reveal-l');
+      const isRight = el.classList.contains('reveal-r');
+
+      gsap.fromTo(el,
+        {
+          opacity: 0,
+          y: (isLeft || isRight) ? 0 : 32,
+          x: isLeft ? -32 : (isRight ? 32 : 0),
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: 0.55,
+          ease: 'power3.out',
+          delay: delaySec,
+          scrollTrigger: {
+            trigger: el,
+            /* 'top bottom' fires the instant element enters viewport — no pre-wait */
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+    window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+
+    /* bfcache restore: pages returning from back/forward nav lose ScrollTrigger math */
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        ScrollTrigger.refresh();
+        /* Safety: if elements near current scroll are still invisible, force-show them */
+        setTimeout(() => {
+          revealTargets.forEach(el => {
+            const cs = getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (inView && parseFloat(cs.opacity) < 0.05) {
+              gsap.to(el, { opacity: 1, y: 0, x: 0, duration: 0.4, ease: 'power2.out' });
+            }
+          });
+        }, 120);
+      }
+    });
+
+    /* Final safety net: 3s after full load, force-reveal any element still at opacity:0
+       regardless of whether it's in view — guarantees content is never permanently hidden */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        revealTargets.forEach(el => {
+          if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (inView) {
+              gsap.to(el, { opacity: 1, y: 0, x: 0, duration: 0.5, ease: 'power2.out' });
+            }
+          }
+        });
+      }, 3000);
+    }, { once: true });
+  } else {
+    document.documentElement.classList.add('no-gsap');
+    forceReveal();
+  }
+
+  /* Number counter — animates .counter elements from 0 to data-count when visible */
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      countIO.unobserve(el);
+      const end = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      if (isNaN(end)) return;
+      if (reduceMotion) {
+        el.textContent = prefix + end.toFixed(decimals) + suffix;
+        return;
+      }
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - start) / duration);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + (ease * end).toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.counter').forEach(el => countIO.observe(el));
+
+  /* Zoom parallax — scroll-driven scale of tiles + gradual fade-out at end */
+  const zp = document.querySelector('.zoom-parallax');
+  if (zp && !reduceMotion) {
+    const items = [...zp.querySelectorAll('.zp-item')];
+    const fade = document.getElementById('zpFadeout');
+    const scales = [4, 5, 6, 5, 6, 8, 9];
+    let zpTicking = false;
+    const zpUpdate = () => {
+      zpTicking = false;
+      const rect = zp.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const total = zp.offsetHeight - window.innerHeight;
+      /* Raw progress not capped — lets us read scroll BEYOND animation end
+         to fade the overlay back out during the sticky release phase. */
+      const raw = -rect.top / Math.max(total, 1);
+      const progress = Math.max(0, Math.min(1, raw));
+      for (let i = 0; i < items.length; i++) {
+        const s = 1 + progress * (scales[i % scales.length] - 1);
+        items[i].style.setProperty('--s', s.toFixed(3));
+      }
+      /* Overlay: climbs 0→1 during 70%–100% of animation, then 1→0 during release (100%–180%).
+         Eliminates the "giant black gap" — viewer sees tiles slide up smoothly into next section. */
+      if (fade) {
+        let f;
+        if (raw < 0.7)      f = 0;
+        else if (raw < 1.0) f = (raw - 0.7) / 0.3;
+        else if (raw < 1.8) f = 1 - (raw - 1.0) / 0.8;
+        else                f = 0;
+        fade.style.setProperty('--fade', Math.max(0, Math.min(1, f)).toFixed(3));
+      }
+    };
+    window.addEventListener('scroll', () => {
+      if (zpTicking) return;
+      zpTicking = true;
+      requestAnimationFrame(zpUpdate);
+    }, { passive: true });
+    zpUpdate();
+  }
+
+  /* Parallax scroll — translates [data-parallax] elements at fraction of scroll */
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  if (parallaxEls.length && !reduceMotion) {
+    let ticking = false;
+    const updateParallax = () => {
+      const y = window.scrollY;
+      parallaxEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        // Only translate when roughly in viewport (avoids paint work offscreen)
+        if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+        const speed = parseFloat(el.dataset.parallax) || 0.15;
+        const offset = (rect.top - window.innerHeight / 2) * speed;
+        el.style.setProperty('--py', `${offset.toFixed(1)}px`);
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }, { passive: true });
+    updateParallax();
+  }
+
+  const chart = document.getElementById('chartLine');
+  if (chart) {
+    const len = chart.getTotalLength();
+    chart.style.strokeDasharray = len;
+    chart.style.strokeDashoffset = len;
+    const drawIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          chart.style.transition = 'stroke-dashoffset 2.4s cubic-bezier(0.22,1,0.36,1)';
+          chart.style.strokeDashoffset = '0';
+          drawIO.unobserve(chart);
+        }
+      });
+    }, { threshold: 0.4 });
+    drawIO.observe(chart);
+  }
+
+  /* mousemove handlers on cards removed — per-pixel style writes were hot.
+     .glass-card hover state now relies on static CSS border/shadow transitions. */
+
+  const nav = document.querySelector('.nav-inner');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.style.boxShadow = '0 20px 60px -20px rgba(109,40,217,0.5)';
+    else                     nav.style.boxShadow = '0 10px 40px -10px rgba(109,40,217,0.3)';
+  }, { passive: true });
+
+  /* ─────────────────────────────────────────────
+     SCROLL-EXPAND HERO — scroll-hijack + expand
+  ───────────────────────────────────────────── */
+  const scrollExpand = document.getElementById('scrollExpand');
+  if (scrollExpand) {
+    const bg          = document.getElementById('scrollExpandBg');
+    const mediaEl     = document.getElementById('scrollExpandMedia');
+    const mediaTint   = document.getElementById('scrollExpandMediaTint');
+    const contentEl   = document.getElementById('scrollExpandContent');
+
+    let progress      = 0;
+    let fullyExpanded = false;
+    let touchStartY   = 0;
+    let isMobile      = window.innerWidth < 768;
+
+    let resizeTO = null;
+    window.addEventListener('resize', () => {
+      if (resizeTO) return;
+      resizeTO = setTimeout(() => {
+        isMobile = window.innerWidth < 768;
+        resizeTO = null;
+      }, 150);
+    });
+
+    /* Compositor-only scaling: no layout, no paint — just GPU composition per frame */
+    let rafPending = false;
+    const write = () => {
+      rafPending = false;
+      /* Uniform scale — visually grows from small to big without distortion.
+         Max scale clamped so the frame never overflows usable viewport. */
+      const maxScale = Math.min(
+        (window.innerWidth  * 0.95) / 300,
+        (window.innerHeight * 0.85) / 400
+      );
+      const s = 1 + progress * (maxScale - 1);
+      mediaEl.style.setProperty('--s', s.toFixed(3));
+      bg.style.opacity = (1 - progress).toFixed(3);
+      mediaTint.style.opacity = Math.max(0, 0.18 - progress * 0.18).toFixed(3);
+    };
+    const apply = () => {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(write);
+    };
+
+    const setExpanded = (v) => {
+      fullyExpanded = v;
+      contentEl.classList.toggle('visible', v);
+      document.documentElement.classList.toggle('se-locked', !v);
+    };
+
+    // Initial lock
+    document.documentElement.classList.add('se-locked');
+    window.scrollTo(0, 0);
+    apply();
+
+    const onWheel = (e) => {
+      if (fullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
+        setExpanded(false);
+        e.preventDefault();
+      } else if (!fullyExpanded) {
+        e.preventDefault();
+        progress = Math.min(1, Math.max(0, progress + e.deltaY * 0.0009));
+        apply();
+        if (progress >= 1) setExpanded(true);
+        else if (progress < 0.75) contentEl.classList.remove('visible');
+      }
+    };
+
+    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
+    const onTouchMove = (e) => {
+      if (!touchStartY) return;
+      const y = e.touches[0].clientY;
+      const d = touchStartY - y;
+      if (fullyExpanded && d < -20 && window.scrollY <= 5) {
+        setExpanded(false);
+        e.preventDefault();
+      } else if (!fullyExpanded) {
+        e.preventDefault();
+        const k = d < 0 ? 0.008 : 0.005;
+        progress = Math.min(1, Math.max(0, progress + d * k));
+        apply();
+        if (progress >= 1) setExpanded(true);
+        else if (progress < 0.75) contentEl.classList.remove('visible');
+        touchStartY = y;
+      }
+    };
+    const onTouchEnd = () => { touchStartY = 0; };
+
+    window.addEventListener('wheel',      onWheel,      { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
+    window.addEventListener('touchmove',  onTouchMove,  { passive: false });
+    window.addEventListener('touchend',   onTouchEnd);
+
+    // If user clicks any nav anchor while locked, force expansion
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => {
+        if (!fullyExpanded) {
+          progress = 1;
+          apply();
+          setExpanded(true);
+        }
+      });
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
